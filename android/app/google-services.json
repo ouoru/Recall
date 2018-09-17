@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "361795944901",
+    "firebase_url": "https://recall-65d13.firebaseio.com",
+    "project_id": "recall-65d13",
+    "storage_bucket": "recall-65d13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361795944901:android:81c1c4606423bc20",
+        "android_client_info": {
+          "package_name": "com.recall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "361795944901-p4uttji7lev8uq2k8surnf58scci8kgh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7mbVCc3eM0zcKnOIdwF3aquCJUP6DA6w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
