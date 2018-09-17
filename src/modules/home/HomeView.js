@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Dimensions } from 'react-native'
 import { RNCamera } from 'react-native-camera'
+
+const { height, width } = Dimensions.get('window')
 
 class HomeView extends Component {
     render() {
@@ -20,7 +22,7 @@ class HomeView extends Component {
 
 const styles = {
     container: {
-        flex: 1,
+        height, width,
         flexDirection: 'column',
         backgroundColor: 'black'
     },
