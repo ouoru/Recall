@@ -8,13 +8,7 @@ class HomeView extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <RNCamera
-                    style={styles.camera}
-                    type={RNCamera.Constants.Type.back}
-                    flashMode={RNCamera.Constants.FlashMode.on}
-                    permissionDialogTitle={'Permission to use camera'}
-                    permissionDialogMessage={'We need your permission to use your camera phone'}
-                />
+            
             </View>
         )
     }
@@ -24,7 +18,7 @@ const styles = {
     container: {
         height, width,
         flexDirection: 'column',
-        backgroundColor: 'black'
+        backgroundColor: 'transparent'
     },
     camera: {
         flex: 1,
