@@ -25,7 +25,8 @@ class TabSlider extends Component {
                 width: SLIDER_WIDTH,
                 borderRadius: SLIDER_HEIGHT/2,
                 backgroundColor: '#fff',
-                position: 'absolute'
+                position: 'absolute',
+                bottom: 40,
             }}/>
         )
     }

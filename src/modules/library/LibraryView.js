@@ -15,9 +15,11 @@ class LibraryView extends Component {
 
 const styles = {
     container: {
-        height, width,
-        flexDirection: 'column',
-        backgroundColor: 'black'
+        height: 0.9 * height,
+        width,
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     },
 }
 

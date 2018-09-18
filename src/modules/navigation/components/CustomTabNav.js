@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Dimensions } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
 import TabIcon from './TabIcon'
 import TabSlider from './TabSlider'
 
@@ -9,7 +10,26 @@ const TAB_MARGIN = 40
 class CustomTabNav extends Component {
     render() {
         return (
-            <View style={styles.tabStyle}>
+            <View style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0, right: 0,
+                paddingBottom: TAB_MARGIN,
+                paddingTop: TAB_MARGIN,
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                justifyContent: 'center',
+            }}>
+                <LinearGradient
+                    colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.4)']}
+                    start={{x: 0.5, y: 0}}
+                    end={{x: 0.5, y: 1}}
+                    style={{
+                        position: 'absolute',
+                        top: 0, bottom: 0,
+                        left: 0, right: 0
+                    }}
+                />
                 <TabSlider
                     index={this.props.scrollIndex}
                 />
@@ -74,17 +94,6 @@ class CustomTabNav extends Component {
                 />
             </View>
         )
-    }
-}
-
-const styles = {
-    tabStyle: {
-        position: 'absolute',
-        bottom: TAB_MARGIN,
-        left: 0, right: 0,
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        justifyContent: 'center',
     }
 }
 

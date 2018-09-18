@@ -30,13 +30,13 @@ class HomeNavigation extends Component {
                     onPageScroll={this._onAndroidScroll}
                     onPageSelected={this._onAndroidScrollEnd}
                 >
-                    <View key={'1'}>
+                    <View key={'1'} style={{ justifyContent: 'flex-end' }}>
                         <LibraryView/>
                     </View>
                     <View key={'2'}>
                         <HomeContainer/>
                     </View>
-                    <View key={'3'}>
+                    <View key={'3'} style={{ justifyContent: 'flex-end' }}>
                         <AgendaView/>
                     </View>
                 </ViewPagerAndroid>
@@ -47,7 +47,7 @@ class HomeNavigation extends Component {
                     ref={ref => this.pagerRef = ref}
                     horizontal
                     contentOffset={{x: width * INITIAL_INDEX, y: 0}}
-                    style={styles.scrollView}
+                    contentContainerStyle={styles.scrollView}
                     pagingEnabled={true}
                     onScroll={this._onScroll}
                 >
@@ -105,6 +105,7 @@ class HomeNavigation extends Component {
         return (
             <View style={styles.container}>
                 <CameraView
+                    scrollIndex={this.state.scrollIndex}
                     ref='test'
                 />
                 {this._renderPager()}
@@ -124,7 +125,7 @@ const styles = {
     },
     scrollView: {
         position: 'absolute',
-        height, width
+        height, width,
     }
 }
 
