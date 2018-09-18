@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { View, Dimensions } from 'react-native'
 import TabIcon from './TabIcon'
-
-import boxImage from '../../../assets/images/box.png'
+import TabSlider from './TabSlider'
 
 const { width } = Dimensions.get('window')
 const TAB_MARGIN = 40
@@ -11,72 +10,65 @@ class CustomTabNav extends Component {
     render() {
         return (
             <View style={styles.tabStyle}>
+                <TabSlider
+                    index={this.props.scrollIndex}
+                />
                 <TabIcon
-                    source={boxImage}
-                    name="save"
+                    font="fontAwesome"
+                    name="archive"
                     color="#fff"
-                    size={35}
+                    size={30}
                     style={{
+                        marginBottom: 5,
                         transform: [
                             { translateX: this.props.scrollIndex.interpolate({
                                 inputRange: [-1, 0, 1, 2, 3],
-                                outputRange: [-20, -20, -width/4, -20, -20]
+                                outputRange: [-15, -15, -width/4, -15, -15]
                             })},
                             { scale: this.props.scrollIndex.interpolate({
                                 inputRange: [-1, 0, 1, 2, 3],
                                 outputRange: [0.8, 0.8, 1, 0.8, 0.8]
                             })}
                         ]
-                    }}
-                    imageStyle={{
-                        height: 35,
-                        width: 35
                     }}
                     onPress={this.props.onTabPress.bind(this, 0)}
                 />
                 <TabIcon
-                    source={boxImage}
                     name="circle"
                     color="#fff"
-                    size={70}
+                    size={64}
                     style={{
+                        marginBottom: 5,
                         transform: [
                             { translateY: this.props.scrollIndex.interpolate({
                                 inputRange: [-1, 0, 1, 2, 3],
-                                outputRange: [0, 0, -30, 0, 0]
+                                outputRange: [0, 0, -20, 0, 0]
                             })},
                             { scale: this.props.scrollIndex.interpolate({
                                 inputRange: [-1, 0, 1, 2, 3],
-                                outputRange: [1, 1, 1.3, 1, 1]
+                                outputRange: [1, 1, 1.25, 1, 1]
                             })}
                         ]
-                    }}
-                    imageStyle={{
-                        height: 60,
-                        width: 60
                     }}
                     onPress={this.props.onTabPress.bind(this, 1)}
                 />
                 <TabIcon
-                    source={boxImage}
-                    name="calendar"
+                    font="fontAwesome"
+                    name="sticky-note"
                     color="#fff"
-                    size={35}
+                    size={30}
                     style={{
+                        marginBottom: 5,
                         transform: [
                             { translateX: this.props.scrollIndex.interpolate({
                                 inputRange: [-1, 0, 1, 2, 3],
-                                outputRange: [20, 20, width/4, 20, 20]
+                                outputRange: [15, 15, width/4, 15, 15]
                             })},
                             { scale: this.props.scrollIndex.interpolate({
                                 inputRange: [-1, 0, 1, 2, 3],
                                 outputRange: [0.8, 0.8, 1, 0.8, 0.8]
                             })}
                         ]
-                    }}
-                    imageStyle={{
-                        height: 35,
-                        width: 35
                     }}
                     onPress={this.props.onTabPress.bind(this, 2)}
                 />
@@ -91,7 +83,7 @@ const styles = {
         bottom: TAB_MARGIN,
         left: 0, right: 0,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
     }
 }

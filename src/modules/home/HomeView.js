@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, Dimensions } from 'react-native'
-import { RNCamera } from 'react-native-camera'
 
 const { height, width } = Dimensions.get('window')
 

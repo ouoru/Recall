@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Dimensions } from 'react-native'
 import { RNCamera } from 'react-native-camera'
+import CameraFooter from './components/CameraFooter';
+import CameraHeader from './components/CameraHeader';
 
 const { height, width } = Dimensions.get('window')
 
