@@ -9,6 +9,8 @@ import CameraView from '../camera/CameraView';
 import CustomTabNav from './components/CustomTabNav'
 
 import { savePhoto } from '../library/LibraryReducer'
+import { showPhotoModal } from '../camera/CameraReducer'
+import PreviewModal from '../camera/components/PreviewModal';
 
 const { height, width } = Dimensions.get('window')
 const INITIAL_INDEX = 1
@@ -101,7 +103,8 @@ class HomeNavigation extends Component {
         if (this.camera) {
             const options = { quality: 0.5, base64: true };
             const data = await this.camera.takePictureAsync(options)
-            this.props.savePhoto(data.uri, Date.now())
+            this.props.showPhotoModal(data.uri, Date.now())
+            //this.props.savePhoto(data.uri, Date.now())
         }
     }
 
@@ -117,6 +120,7 @@ class HomeNavigation extends Component {
                     scrollIndex={this.state.scrollIndex}
                     onTabPress={this._onTabPress}
                 />
+                <PreviewModal/>
             </View>
         )
     }
@@ -135,5 +139,5 @@ const styles = {
 
 export default connect(
     null,
-    { savePhoto }
+    { savePhoto, showPhotoModal }
 )(HomeNavigation)
