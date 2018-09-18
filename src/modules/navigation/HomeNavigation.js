@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { Platform, ScrollView, Dimensions, View, ViewPagerAndroid, Animated } from 'react-native'
+import { connect } from 'react-redux'
+
 import AgendaView from '../agenda/AgendaView'
 import LibraryView from '../library/LibraryView'
 import HomeContainer from '../home/HomeContainer';
 import CameraView from '../camera/CameraView';
 import CustomTabNav from './components/CustomTabNav'
+
+import { savePhoto } from '../library/LibraryReducer'
 
 const { height, width } = Dimensions.get('window')
 const INITIAL_INDEX = 1
@@ -97,7 +101,7 @@ class HomeNavigation extends Component {
         if (this.camera) {
             const options = { quality: 0.5, base64: true };
             const data = await this.camera.takePictureAsync(options)
-            console.log(data.uri);
+            this.props.savePhoto(data.uri, Date.now())
         }
     }
 
@@ -129,4 +133,7 @@ const styles = {
     }
 }
 
-export default HomeNavigation
+export default connect(
+    null,
+    { savePhoto }
+)(HomeNavigation)

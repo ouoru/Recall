@@ -18,6 +18,8 @@ class CameraView extends Component {
                     flashMode={RNCamera.Constants.FlashMode.off}
                     permissionDialogTitle={'Permission to use camera'}
                     permissionDialogMessage={'We need your permission to use your camera phone'}
+                    fixOrientation={true}
+                    forceUpOrientation={true}
                 />
                 <Animated.View
                     style={{
