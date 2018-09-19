@@ -1,3 +1,5 @@
+import fuseService from '../../services/fuseService'
+
 const initialState = {
     gallery: []
 }
@@ -14,6 +16,7 @@ export function savePhoto(uri, keywords, timestamp) {
                 timestamp,
             }
         })
+        fuseService.update({uri, keywords, timestamp})
     }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Animated, Dimensions } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 import SearchBar from '../search/SearchBar';
+import SearchResults from '../search/SearchResults';
 
 const { height, width } = Dimensions.get('window')
 
@@ -18,6 +19,7 @@ class CameraView extends Component {
                     permissionDialogMessage={'We need your permission to use your camera phone'}
                 />
                 <SearchBar/>
+                <SearchResults/>
             </View>
         )
     }

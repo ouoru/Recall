@@ -3,6 +3,8 @@ import { View, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/Feather'
 
+import { updateSearchText, updateSearchFocus } from './SearchReducer'
+
 class SearchBar extends Component {
     constructor(props) {
         super(props)
@@ -15,7 +17,11 @@ class SearchBar extends Component {
         this.setState({
             searchText: text
         })
+        this.props.updateSearchText(text)
     }
+
+    _onFocus = () => this.props.updateSearchFocus(true)
+    _onBlur = () => this.props.updateSearchFocus(false)
 
     render() {
         if (this.props.photoTaken) return null
@@ -25,17 +31,19 @@ class SearchBar extends Component {
                 <Icon name="search" color="#fff" size={22} style={{ marginLeft: 30 }}/>
                 <TextInput
                     value={this.state.searchText}
+                    onFocus={this._onFocus}
+                    onBlur={this._onBlur}
                     onChangeText={this._onChangeText}
                     style={{
                         flex: 1,
                         color: '#fff',
-                        fontFamily: 'Roboto-Medium',
+                        fontFamily: 'Roboto-Regular',
                         fontSize: 18,
                         marginRight: 5,
                         marginLeft: 5,
                     }}
                     placeholder={'Search'}
-                    placeholderTextColor={'rgba(0,0,0,0.6)'}
+                    placeholderTextColor={'rgba(255,255,255,0.6)'}
                     autoCorrect={false}
                     underlineColorAndroid={'transparent'}
                 />
@@ -61,5 +69,6 @@ const styles = {
 export default connect(
     state => ({
         photoTaken: state.camera.photoTaken
-    })
+    }),
+    { updateSearchText, updateSearchFocus }
 )(SearchBar)
