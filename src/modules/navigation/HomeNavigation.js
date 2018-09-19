@@ -7,7 +7,8 @@ import CameraView from '../camera/CameraView';
 import { savePhoto } from '../library/LibraryReducer'
 import { showPhotoModal } from '../camera/CameraReducer'
 import Aperture from '../camera/components/Aperture';
-import Preview from '../camera/Preview';
+import Preview from '../preview/Preview';
+import TopToast from './components/TopToast'
 
 const { height, width } = Dimensions.get('window')
 
@@ -32,6 +33,7 @@ class HomeNavigation extends Component {
                 <CameraView ref='test'/>
                 <Aperture onPress={this._takePicture}/>
                 <Preview/>
+                <TopToast/>
             </View>
         )
     }

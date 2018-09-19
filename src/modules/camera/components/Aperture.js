@@ -1,22 +1,35 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import TabIcon from '../../navigation/components/TabIcon'
+import OpacityIn from '../../animate/OpacityIn';
 
 class Aperture extends Component {
     render() {
+        const { searchText, searchFocused, onPress } = this.props
+
         return (
-            <TabIcon
-                name="circle"
-                color="#fff"
-                size={80}
-                onPress={this.props.onPress}
+            <OpacityIn visible={!searchText && !searchFocused}
                 style={{
                     position: 'absolute',
                     bottom: 50,
-                    alignSelf: 'center',
+                    alignSelf: 'center'
                 }}
-            />
+            >
+                <TabIcon
+                    name="circle"
+                    color="#fff"
+                    size={80}
+                    onPress={onPress}
+                />
+            </OpacityIn>
         )
     }
 }
 
-export default Aperture
+export default connect(
+    state => ({
+        searchText: state.search.searchText,
+        searchFocused: state.search.searchFocused,
+    })
+)(Aperture)

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/Feather'
+import LinearGradient from 'react-native-linear-gradient'
 
 import { updateSearchText, updateSearchFocus } from './SearchReducer'
 
@@ -20,14 +21,29 @@ class SearchBar extends Component {
         this.props.updateSearchText(text)
     }
 
-    _onFocus = () => this.props.updateSearchFocus(true)
-    _onBlur = () => this.props.updateSearchFocus(false)
+    _onFocus = () => {
+        this.props.updateSearchFocus(true)
+    }
+    
+    _onBlur = () => {
+        this.props.updateSearchFocus(false)
+        if (this.state.searchText) {
+            
+        } else {
+            this._onChangeText('')
+        }
+    }
 
     render() {
         if (this.props.photoTaken) return null
 
         return (
-            <View style={styles.container}>
+            <LinearGradient 
+                colors={['rgba(0,0,0,0.5)', 'rgba(0,0,0,0)']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={styles.container}
+            >
                 <Icon name="search" color="#fff" size={22} style={{ marginLeft: 30 }}/>
                 <TextInput
                     value={this.state.searchText}
@@ -48,7 +64,7 @@ class SearchBar extends Component {
                     underlineColorAndroid={'transparent'}
                 />
                 <Icon name="grid" color="#fff" size={22} style={{ marginRight: 30 }}/>
-            </View>
+            </LinearGradient>
         )
     }
 }
@@ -56,9 +72,10 @@ class SearchBar extends Component {
 const styles = {
     container: {
         position: 'absolute',
-        top: 15,
+        top: 0,
         left: 0, right: 0,
-        height: 50,
+        height: 65,
+        paddingTop: 15,
         flexDirection: 'row',
         alignItems: 'center',
         borderBottomWidth: 1,

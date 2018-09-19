@@ -1,7 +1,7 @@
 import fuseService from '../../services/fuseService'
 
 const initialState = {
-    searchText: null,
+    searchText: '',
     searchFocused: false,
     searchResults: [],
 }

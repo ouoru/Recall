@@ -4,6 +4,7 @@ class FuseService{
     constructor(){
         this.fuse = null
         this.options = {
+            shouldSort: true,
             includeScore: true,
             threshold: 0.3,
             maxPatternLength: 15,
