@@ -13,7 +13,7 @@ class SearchResults extends Component {
     }
 
     render() {
-        if (!this.props.searchFocused) return null
+        if (!this.props.searchFocused && !this.props.searchText) return null
 
         return (
             <ScrollView
@@ -38,6 +38,7 @@ const styles = {
 
 export default connect(
     state => ({
+        searchText: state.search.searchText,
         searchFocused: state.search.searchFocused,
         searchResults: state.search.searchResults
     })

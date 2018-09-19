@@ -7,7 +7,10 @@ const initialState = {
 const SAVE_PHOTO = 'library/save-photo'
 
 export function savePhoto(uri, keywords, timestamp) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const { library } = getState()
+        const { gallery } = library
+        
         dispatch({
             type: SAVE_PHOTO,
             payload: {
@@ -16,7 +19,7 @@ export function savePhoto(uri, keywords, timestamp) {
                 timestamp,
             }
         })
-        fuseService.update({uri, keywords, timestamp})
+        fuseService.update({uri, keywords, timestamp}, gallery)
     }
 }
 
