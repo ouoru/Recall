@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { View, Animated, Dimensions } from 'react-native'
 import { RNCamera } from 'react-native-camera'
+import SearchBar from '../search/SearchBar';
 
 const { height, width } = Dimensions.get('window')
 
 class CameraView extends Component {
-
     render() {
-        const { scrollIndex } = this.props
-
         return (
             <View style={styles.container}>
                 <RNCamera
@@ -18,21 +16,8 @@ class CameraView extends Component {
                     flashMode={RNCamera.Constants.FlashMode.off}
                     permissionDialogTitle={'Permission to use camera'}
                     permissionDialogMessage={'We need your permission to use your camera phone'}
-                    fixOrientation={true}
-                    forceUpOrientation={true}
                 />
-                <Animated.View
-                    style={{
-                        position: 'absolute',
-                        top: 0, bottom: 0,
-                        left: 0, right: 0,
-                        backgroundColor: '#334D5D',
-                        opacity: scrollIndex.interpolate({
-                            inputRange: [-1, 0, 1, 2, 3],
-                            outputRange: [1, 1, 0, 1, 1]
-                        })
-                    }}
-                />
+                <SearchBar/>
             </View>
         )
     }

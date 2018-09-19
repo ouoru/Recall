@@ -4,13 +4,14 @@ const initialState = {
 
 const SAVE_PHOTO = 'library/save-photo'
 
-export function savePhoto(uri, timestamp) {
+export function savePhoto(uri, keywords, timestamp) {
     return (dispatch) => {
         dispatch({
             type: SAVE_PHOTO,
             payload: {
-                uri: uri,
-                timestamp: timestamp
+                uri,
+                keywords,
+                timestamp,
             }
         })
     }

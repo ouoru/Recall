@@ -6,12 +6,15 @@ const initialState = {
 const SHOW_PHOTO_MODAL = 'camera/show-photo-modal'
 const HIDE_PHOTO_MODAL = 'camera/hide-photo-modal'
 
-export function showPhotoModal(uri, timestamp) {
+export function showPhotoModal(data, timestamp) {
     return (dispatch) => {
         dispatch({
             type: SHOW_PHOTO_MODAL,
             payload: {
-                uri, timestamp
+                uri: data.uri,
+                width: data.width,
+                height: data.height,
+                timestamp
             }
         })
     }
