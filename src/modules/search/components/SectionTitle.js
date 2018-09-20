@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, Dimensions } from 'react-native'
+
 const { width } = Dimensions.get('window')
+const HEADER_HEIGHT = 34
 
 class SectionTitle extends Component {
     render() {
@@ -17,6 +19,7 @@ class SectionTitle extends Component {
 const styles = {
     container: {
         width,
+        height: HEADER_HEIGHT,
         flexDirection: 'row',
         alignItems: 'center',
     },

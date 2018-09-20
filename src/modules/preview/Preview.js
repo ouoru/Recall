@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, Dimensions, Text, TextInput, ImageBackground } from 'react-native'
+import { View, Dimensions, Text, TextInput, ImageBackground } from 'react-native'
 import { connect } from 'react-redux'
 
 import CloseButton from './components/CloseButton'
@@ -55,7 +55,7 @@ class Preview extends Component {
                 <View style={styles.darken}>
                     <CloseButton onPress={this.props.hidePhotoModal}/>
                     <Text style={styles.titleText}>
-                        {'Describe\nyour Photo.'}
+                        {'Tag\nyour Photo.'}
                     </Text>
                     <View style={{
                         flexDirection: 'row',
@@ -71,8 +71,7 @@ class Preview extends Component {
                                 flex: 1,
                                 color: '#fff',
                                 fontFamily: 'Roboto-Regular',
-                                fontSize: 18,
-                                marginRight: 5,
+                                fontSize: 16,
                             }}
                             placeholder={'Names, Keywords ...'}
                             placeholderTextColor={'#e6e6e6'}
@@ -102,7 +101,7 @@ const styles = {
     },
     titleText: {
         fontFamily: 'Roboto-Bold',
-        fontSize: 32,
+        fontSize: 28,
         color: '#fff',
         paddingLeft: LEFT_MARGIN,
     },

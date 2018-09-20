@@ -1,28 +1,18 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, Text } from 'react-native'
-import Icon from 'react-native-vector-icons/Feather'
+import Action from '../../components/Action'
 
 class SubmitButton extends Component {
     render() {
         return (
-            <TouchableOpacity
-                onPress={this.props.onPress}
-                style={styles.buttonStyle}
-            >
-                <Icon name="arrow-right" size={23} color='#fff' style={{ textAlign: 'center' }}/>
-            </TouchableOpacity>
+            <Action name="check" size={25} color='#fff' style={styles.buttonStyle}/>
         )
     }
 }
 
 const styles = {
     buttonStyle: {
-        height: 35,
-        width: 50,
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: '#fff',
-        justifyContent: 'center',
+        position: 'absolute',
+        right: 5,
     },
 }
 

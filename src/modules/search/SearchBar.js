@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/Feather'
+import Action from '../components/Action'
 import LinearGradient from 'react-native-linear-gradient'
 
 import { updateSearchText, updateSearchFocus } from './SearchReducer'
@@ -19,6 +20,10 @@ class SearchBar extends Component {
             searchText: text
         })
         this.props.updateSearchText(text)
+    }
+
+    _focus = () => {
+        this.refs.textInput.focus()
     }
 
     _onFocus = () => {
@@ -46,8 +51,10 @@ class SearchBar extends Component {
                 end={{ x: 0, y: 1 }}
                 style={[styles.container, searchText || searchFocused ? {} : styles.bottomBorder]}
             >
-                <Icon name="search" color="#fff" size={22} style={{ marginLeft: 30 }}/>
+                <Action name="user" color="#fff" size={25} style={{ marginRight: 10 }}/>
+                <Action name="search" color="#fff" size={22} onPress={this._focus}/>
                 <TextInput
+                    ref={'textInput'}
                     value={this.state.searchText}
                     onFocus={this._onFocus}
                     onBlur={this._onBlur}
@@ -65,7 +72,8 @@ class SearchBar extends Component {
                     autoCorrect={false}
                     underlineColorAndroid={'transparent'}
                 />
-                <Icon name="grid" color="#fff" size={22} style={{ marginRight: 30 }}/>
+                <Icon name="zap" color="#fff" size={22} style={{ marginRight: 20 }}/>
+                <Icon name="camera" color="#fff" size={25}/>
             </LinearGradient>
         )
     }
@@ -77,7 +85,8 @@ const styles = {
         top: 0,
         left: 0, right: 0,
         height: 65,
-        paddingTop: 15,
+        paddingLeft: 15,
+        paddingRight: 15,
         flexDirection: 'row',
         alignItems: 'center',
     },

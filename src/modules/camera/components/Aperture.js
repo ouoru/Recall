@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import TabIcon from '../../navigation/components/TabIcon'
+import Action from '../../components/Action'
 import OpacityIn from '../../animate/OpacityIn';
 
 class Aperture extends Component {
@@ -16,7 +16,7 @@ class Aperture extends Component {
                     alignSelf: 'center'
                 }}
             >
-                <TabIcon
+                <Action
                     name="circle"
                     color="#fff"
                     size={80}
