@@ -55,7 +55,7 @@ class PreviewView extends Component {
                 style={styles.container}
             >
                 <View style={styles.darken}>
-                    <CloseButton onPress={this._goBack}/>
+                    <Action name="x" color="#fff" size={22} onPress={this._goBack}/>
                     <Text style={styles.titleText}>
                         {'Tag\nyour Photo.'}
                     </Text>
@@ -81,7 +81,7 @@ class PreviewView extends Component {
                             autoCorrect={false}
                             underlineColorAndroid={'#fff'}
                         />
-                        <SubmitButton onPress={this._verifyText}/>
+                        <Action name="check" color='#fff' size={25} style={styles.buttonStyle} onPress={this._verifyText}/>
                     </View>
                     <View style={{ height: 200 }}/>
                 </View>
@@ -112,7 +112,6 @@ const styles = {
 
 export default connect(
     state => ({
-        photoTaken: state.camera.photoTaken,
         photoData: state.camera.photoData,
     }),
     { hidePhotoModal, savePhoto }

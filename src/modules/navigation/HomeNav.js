@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation'
 import CameraView from '../camera/CameraView'
 import PreviewView from '../preview/PreviewView'
 
-let opacity = (index, position) => {
+const opacity = (index, position) => {
     const inputRange = [index - 1, index, index + 1];
     const opacity = position.interpolate({
         inputRange,
@@ -35,7 +35,7 @@ const HomeNav = createStackNavigator(
     },
     {
         headerMode: 'none',
-        transitionConfig: config
+        transitionConfig: config,
     }
 )
 

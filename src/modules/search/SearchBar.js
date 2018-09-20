@@ -44,10 +44,8 @@ class SearchBar extends Component {
     }
 
     render() {
-        const { photoTaken, searchFocused, searchText } = this.props
-
-        if (photoTaken) return null
-
+        const { searchFocused, searchText } = this.props
+        
         return (
             <LinearGradient 
                 colors={['rgba(0,0,0,0.5)', 'rgba(0,0,0,0)']}
@@ -102,7 +100,6 @@ const styles = {
 
 export default connect(
     state => ({
-        photoTaken: state.camera.photoTaken,
         searchText: state.search.searchText,
         searchFocused: state.search.searchFocused,
     }),

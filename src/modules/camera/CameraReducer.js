@@ -1,5 +1,4 @@
 const initialState = {
-    photoTaken: false,
     photoData: {},
 }
 
@@ -28,14 +27,12 @@ export function hidePhotoModal() {
     }
 }
 
-
-
 export default (state = initialState, action) => {
     switch(action.type){
         case SHOW_PHOTO_MODAL:
-            return { ...state, photoTaken: true, photoData: action.payload }
+            return { ...state, photoData: action.payload }
         case HIDE_PHOTO_MODAL:
-            return { ...state, photoTaken: false, photoData: {} }
+            return { ...state, photoData: {} }
         default:
             return state;
     }
