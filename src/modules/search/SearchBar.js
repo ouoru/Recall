@@ -15,6 +15,10 @@ class SearchBar extends Component {
         }
     }
 
+    _openDrawer = () => {
+        this.props.navigation.openDrawer()
+    }
+
     _onChangeText = text => {
         this.setState({
             searchText: text
@@ -51,7 +55,7 @@ class SearchBar extends Component {
                 end={{ x: 0, y: 1 }}
                 style={[styles.container, searchText || searchFocused ? {} : styles.bottomBorder]}
             >
-                <Action name="user" color="#fff" size={25} style={{ marginRight: 10 }}/>
+                <Action name="user" color="#fff" size={25} style={{ marginRight: 10 }} onPress={this._openDrawer}/>
                 <Action name="search" color="#fff" size={22} onPress={this._focus}/>
                 <TextInput
                     ref={'textInput'}

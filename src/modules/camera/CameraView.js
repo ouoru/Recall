@@ -19,7 +19,7 @@ class CameraView extends Component {
                     permissionDialogMessage={'We need your permission to use your camera phone'}
                 />
                 <SearchResults/>
-                <SearchBar/>
+                <SearchBar navigation={this.props.navigation}/>
             </View>
         )
     }

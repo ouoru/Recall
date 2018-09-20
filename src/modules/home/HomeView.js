@@ -12,7 +12,7 @@ import TopToast from './components/TopToast'
 
 const { height, width } = Dimensions.get('window')
 
-class HomeNavigation extends Component {
+class HomeView extends Component {
     _takePicture = async () => {
         this.camera = this.refs.test.refs.camera
 
@@ -30,7 +30,7 @@ class HomeNavigation extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <CameraView ref='test'/>
+                <CameraView ref='test' navigation={this.props.navigation}/>
                 <Aperture onPress={this._takePicture}/>
                 <Preview/>
                 <TopToast/>
@@ -53,4 +53,4 @@ const styles = {
 export default connect(
     null,
     { savePhoto, showPhotoModal }
-)(HomeNavigation)
+)(HomeView)
