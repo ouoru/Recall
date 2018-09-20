@@ -35,14 +35,16 @@ class SearchBar extends Component {
     }
 
     render() {
-        if (this.props.photoTaken) return null
+        const { photoTaken, searchFocused, searchText } = this.props
+
+        if (photoTaken) return null
 
         return (
             <LinearGradient 
                 colors={['rgba(0,0,0,0.5)', 'rgba(0,0,0,0)']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
-                style={styles.container}
+                style={[styles.container, searchText || searchFocused ? {} : styles.bottomBorder]}
             >
                 <Icon name="search" color="#fff" size={22} style={{ marginLeft: 30 }}/>
                 <TextInput
@@ -78,6 +80,8 @@ const styles = {
         paddingTop: 15,
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    bottomBorder: {
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(255,255,255,0.4)',
     }
@@ -85,7 +89,9 @@ const styles = {
 
 export default connect(
     state => ({
-        photoTaken: state.camera.photoTaken
+        photoTaken: state.camera.photoTaken,
+        searchText: state.search.searchText,
+        searchFocused: state.search.searchFocused,
     }),
     { updateSearchText, updateSearchFocus }
 )(SearchBar)

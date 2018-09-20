@@ -1,22 +1,37 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, View, Image, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
 
 import OpacityIn from '../animate/OpacityIn'
+import SectionTitle from './components/SectionTitle';
 
 const { height, width } = Dimensions.get('window')
-const PHOTO_MARGIN = 5
+const PHOTO_SIZE = width / 5
 
 class SearchResults extends Component {
     _renderItem = ({item, score}) => {
         return (
-            <View key={item.timestamp}>
+            <View key={item.timestamp} style={{
+                flexDirection: 'row',
+                marginBottom: 2,
+            }}>
                 <Image source={{ uri: item.uri }} style={[styles.photoDim, styles.imagePadding]}/>
-                <View style={styles.labelStyle}>
-                    <Text style={styles.keywordsStyle}>
+                <View style={{
+                    width: width * 3 / 5,
+                    justifyContent: 'center',
+                }}>
+                    <Text
+                        style={styles.keywordsStyle}
+                    >
                         {item.keywords}
                     </Text>
-                </View> 
+                    <Text
+                        style={styles.dateStyle}
+                    >
+                        Taken on Sept 13, 2018
+                    </Text>
+                </View>
             </View>
         )
     }
@@ -27,14 +42,13 @@ class SearchResults extends Component {
                 visible={this.props.searchFocused || this.props.searchText}
                 style={styles.container}
             >
+                <SectionTitle>MY PHOTOS</SectionTitle>
                 <ScrollView
                     style={{
-                        flex: 1
+                        flex: 1,
                     }}
                     contentContainerStyle={{
                         alignItems: 'center',
-                        flexDirection: 'row',
-                        flexWrap: 'wrap'
                     }}
                     pointerEvents="box-none"
                 >
@@ -51,29 +65,31 @@ const styles = {
         top: 0, bottom: 0,
         left: 0, right: 0,
         paddingTop: 65,
-        backgroundColor: 'rgba(0,0,0,0.4)'
+        backgroundColor: 'rgba(0,0,0,0.8)'
     },
     photoDim: {
-        width: width / 3 - 2 * PHOTO_MARGIN,
-        height: width / 3 - 2 * PHOTO_MARGIN,
+        width: PHOTO_SIZE,
+        height: PHOTO_SIZE,
+        borderRadius: 3,
     },
     imagePadding: {
-        margin: PHOTO_MARGIN,
-    },
-    labelStyle: {
-        width: width / 3 - 2 * PHOTO_MARGIN,
-        height: 40,
-        backgroundColor: 'rgba(35,45,47,1)',
-        marginLeft: PHOTO_MARGIN,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 20,
+        margin: 2,
     },
     keywordsStyle: {
-        fontFamily: 'Roboto-Regular',
-        fontSize: 17,
-        lineHeight: 20,
+        fontFamily: 'Roboto-Medium',
+        fontSize: 14,
+        lineHeight: 17,
         color: '#fff',
+        marginLeft: 10,
+        letterSpacing: 0.4,
+    },
+    dateStyle: {
+        fontFamily: 'Roboto-Regular',
+        fontSize: 12,
+        lineHeight: 15,
+        color: '#e6e6e6',
+        marginLeft: 10,
+        letterSpacing: 0.4,
     }
 }
 
