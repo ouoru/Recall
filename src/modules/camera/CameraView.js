@@ -21,6 +21,7 @@ class CameraView extends Component {
             };
             const data = await this.refs.camera.takePictureAsync(options)
             this.props.showPhotoModal(data, Date.now())
+            this.props.navigation.navigate('Preview')
         }
     }
 

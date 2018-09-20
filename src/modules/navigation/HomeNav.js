@@ -1,13 +1,41 @@
 import { createStackNavigator } from 'react-navigation'
 
-import HomeView from '../home/HomeView'
+import CameraView from '../camera/CameraView'
+import PreviewView from '../preview/PreviewView'
+
+let opacity = (index, position) => {
+    const inputRange = [index - 1, index, index + 1];
+    const opacity = position.interpolate({
+        inputRange,
+        outputRange: [0, 1, 1],
+    });
+
+    return {
+        opacity
+    };
+};
+
+const config = () => {
+    return {
+        // Define scene interpolation, eq. custom transition
+        screenInterpolator: (sceneProps) => {
+
+            const {position, scene} = sceneProps;
+            const {index} = scene;
+
+            return opacity(index, position);
+        }
+    }
+};
 
 const HomeNav = createStackNavigator(
     {
-        Home: { screen: HomeView }
+        Camera: { screen: CameraView },
+        Preview: { screen: PreviewView },
     },
     {
-        headerMode: 'none'
+        headerMode: 'none',
+        transitionConfig: config
     }
 )
 

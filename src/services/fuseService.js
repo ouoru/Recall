@@ -12,13 +12,13 @@ class FuseService{
         }
     }
 
-    update(item, gallery) {
-        this.fuse = new Fuse([...gallery, item], this.options)
+    update(item, photos) {
+        this.fuse = new Fuse([...photos, item], this.options)
     }
 
-    search(text, gallery) {
+    search(text, photos) {
         if (!this.fuse) {
-            this.fuse = new Fuse(gallery, this.options)
+            this.fuse = new Fuse(photos, this.options)
         }
         return this.fuse.search(text)
     }

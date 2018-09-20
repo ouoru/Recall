@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import { ScrollView, Dimensions } from 'react-native'
+import { ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
 import OpacityIn from '../animate/OpacityIn'
 import SectionTitle from './components/SectionTitle';
 import SearchMatch from './components/SearchMatch'
-
-const { height, width } = Dimensions.get('window')
-const PHOTO_SIZE = width / 5
 
 class SearchResults extends Component {
     render() {
@@ -47,6 +44,7 @@ export default connect(
     state => ({
         searchText: state.search.searchText,
         searchFocused: state.search.searchFocused,
-        searchResults: state.search.searchResults
+        searchResults: state.search.searchResults,
+        photos: state.library.photos,
     })
 )(SearchResults)

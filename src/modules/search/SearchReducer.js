@@ -13,7 +13,7 @@ const UPDATE_SEARCH_FOCUS = 'search/update-search-focus'
 export function updateSearchText(text) {
     return (dispatch, getState) => {
         const { library } = getState()
-        const { gallery } = library
+        const { photos } = library
 
         dispatch({
             type: UPDATE_SEARCH_TEXT,
@@ -21,7 +21,7 @@ export function updateSearchText(text) {
         })
         dispatch({
             type: UPDATE_SEARCH_RESULTS,
-            payload: fuseService.search(text, gallery)
+            payload: fuseService.search(text, photos)
         })
     }
 }

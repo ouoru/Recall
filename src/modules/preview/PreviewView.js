@@ -10,13 +10,17 @@ import { savePhoto } from '../library/LibraryReducer'
 const { height, width } = Dimensions.get('window')
 const LEFT_MARGIN = 30
 
-class Preview extends Component {
+class PreviewView extends Component {
     constructor(props) {
         super(props)
         this.state = {
             keywords: null,
             error: null,
         }
+    }
+
+    _goBack = () => {
+        this.props.navigation.goBack()
     }
 
     _onChangeText = text => {
@@ -43,9 +47,7 @@ class Preview extends Component {
     }
 
     render() {
-        const { photoTaken, photoData } = this.props
-
-        if (!photoTaken) return null
+        const { photoData } = this.props
 
         return (
             <ImageBackground
@@ -53,7 +55,7 @@ class Preview extends Component {
                 style={styles.container}
             >
                 <View style={styles.darken}>
-                    <CloseButton onPress={this.props.hidePhotoModal}/>
+                    <CloseButton onPress={this._goBack}/>
                     <Text style={styles.titleText}>
                         {'Tag\nyour Photo.'}
                     </Text>
@@ -93,6 +95,7 @@ const styles = {
         position: 'absolute',
         height, width,
         justifyContent: 'center',
+        backgroundColor: '#000',
     },
     darken: {
         height, width,
@@ -113,4 +116,4 @@ export default connect(
         photoData: state.camera.photoData,
     }),
     { hidePhotoModal, savePhoto }
-)(Preview)
+)(PreviewView)
