@@ -1,12 +1,29 @@
 import React, { Component } from 'react'
-import { View, Animated, Dimensions } from 'react-native'
+import { View, Dimensions } from 'react-native'
+import { connect } from 'react-redux'
 import { RNCamera } from 'react-native-camera'
+
 import SearchBar from '../search/SearchBar';
 import SearchResults from '../search/SearchResults';
+import Aperture from './components/Aperture'
+
+import { showPhotoModal } from './CameraReducer'
 
 const { height, width } = Dimensions.get('window')
 
 class CameraView extends Component {
+    _takePicture = async () => {
+        if (this.refs.camera) {
+            const options = {
+                quality: 0.5,
+                fixOrientation: true,
+                skipProcessing: true
+            };
+            const data = await this.refs.camera.takePictureAsync(options)
+            this.props.showPhotoModal(data, Date.now())
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -20,6 +37,7 @@ class CameraView extends Component {
                 />
                 <SearchResults/>
                 <SearchBar navigation={this.props.navigation}/>
+                <Aperture onPress={this._takePicture}/>
             </View>
         )
     }
@@ -38,4 +56,7 @@ const styles = {
     }
 }
 
-export default CameraView
+export default connect(
+    null,
+    { showPhotoModal }
+)(CameraView)

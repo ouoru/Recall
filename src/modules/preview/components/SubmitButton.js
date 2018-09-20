@@ -4,7 +4,7 @@ import Action from '../../components/Action'
 class SubmitButton extends Component {
     render() {
         return (
-            <Action name="check" size={25} color='#fff' style={styles.buttonStyle}/>
+            <Action name="check" size={25} color='#fff' style={styles.buttonStyle} onPress={this.props.onPress}/>
         )
     }
 }

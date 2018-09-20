@@ -6,7 +6,7 @@ import storage from 'redux-persist/lib/storage'
 import reducers from './reducers';
 
 const persistConfig = {
-    timeout: 10000,
+    timeout: 1000,
     key: 'root',
     storage,
     whitelist: ['library']
