@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { View, Dimensions, Text, TextInput, ImageBackground } from 'react-native'
 import { connect } from 'react-redux'
 
-import CloseButton from './components/CloseButton'
-import SubmitButton from './components/SubmitButton'
+import Action from '../components/Action'
+
 import { hidePhotoModal } from '../camera/CameraReducer'
 import { savePhoto } from '../library/LibraryReducer'
 
@@ -55,17 +55,12 @@ class PreviewView extends Component {
                 style={styles.container}
             >
                 <View style={styles.darken}>
-                    <Action name="x" color="#fff" size={22} onPress={this._goBack}/>
+                    <Action name="x" color="#fff" size={22} style={{position: 'absolute', left: 30, top: 30}}
+                        onPress={this._goBack}/>
                     <Text style={styles.titleText}>
                         {'Tag\nyour Photo.'}
                     </Text>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginLeft: LEFT_MARGIN,
-                        marginRight: LEFT_MARGIN,
-                    }}>
+                    <View style={styles.inputStyle}>
                         <TextInput
                             value={this.state.keywords}
                             onChangeText={this._onChangeText}
@@ -81,7 +76,8 @@ class PreviewView extends Component {
                             autoCorrect={false}
                             underlineColorAndroid={'#fff'}
                         />
-                        <Action name="check" color='#fff' size={25} style={styles.buttonStyle} onPress={this._verifyText}/>
+                        <Action name="check" color='#fff' size={25} style={{position: 'absolute', right: 5}}
+                            onPress={this._verifyText}/>
                     </View>
                     <View style={{ height: 200 }}/>
                 </View>
@@ -108,6 +104,13 @@ const styles = {
         color: '#fff',
         paddingLeft: LEFT_MARGIN,
     },
+    inputStyle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: LEFT_MARGIN,
+        marginRight: LEFT_MARGIN,
+    }
 }
 
 export default connect(

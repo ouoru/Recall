@@ -26,13 +26,15 @@ class CameraView extends Component {
     }
 
     render() {
+        const { flash, camera } = this.props
+
         return (
             <View style={styles.container}>
                 <RNCamera
                     ref={'camera'}
                     style={styles.camera}
-                    type={RNCamera.Constants.Type.back}
-                    flashMode={RNCamera.Constants.FlashMode.off}
+                    type={camera ? RNCamera.Constants.Type.back : RNCamera.Constants.Type.front}
+                    flashMode={flash ? RNCamera.Constants.FlashMode.on : RNCamera.Constants.FlashMode.off}
                     permissionDialogTitle={'Permission to use camera'}
                     permissionDialogMessage={'We need your permission to use your camera phone'}
                 />
@@ -58,6 +60,9 @@ const styles = {
 }
 
 export default connect(
-    null,
+    state => ({
+        camera: state.camera.camera,
+        flash: state.camera.flash
+    }),
     { showPhotoModal }
 )(CameraView)

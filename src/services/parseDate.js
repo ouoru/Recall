@@ -1,4 +1,6 @@
-export function stampToDate(stamp){
+import _ from 'lodash'
+
+export function stampToDate(stamp) {
     var a = new Date(stamp);
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var year = a.getFullYear();
@@ -7,7 +9,7 @@ export function stampToDate(stamp){
     return `Taken on ${month} ${date}, ${year}`;
 }
 
-export function stampToDateObj(stamp){
+export function stampToDateObj(stamp) {
     var a = new Date(stamp);
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var year = a.getFullYear();
@@ -16,4 +18,11 @@ export function stampToDateObj(stamp){
     var hour = a.getHours();
     var min = a.getMinutes();
     return { year, month, date, hour, min };
+}
+
+export function filterPastWeek(library, text) {
+    var week = 7 * 24 * 60 * 60 * 1000
+    var weekAgo = Date.now() - week
+    console.log(_.sortBy(_.filter(library.photos, a => a.timestamp > weekAgo), b => b.timestamp))
+    return _.sortBy(_.filter(library.photos, a => a.timestamp > weekAgo), b => b.timestamp)
 }

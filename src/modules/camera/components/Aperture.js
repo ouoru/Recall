@@ -1,29 +1,39 @@
 import React, { Component } from 'react'
+import { Dimensions } from 'react-native'
 import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
 
 import Action from '../../components/Action'
-import OpacityIn from '../../animate/OpacityIn';
+
+const { height, width } = Dimensions.get('window')
 
 class Aperture extends Component {
     render() {
         const { searchText, searchFocused, onPress } = this.props
 
         return (
-            <OpacityIn visible={!searchText && !searchFocused}
-                style={{
-                    position: 'absolute',
-                    bottom: 50,
-                    alignSelf: 'center'
-                }}
+            
+            <LinearGradient 
+                colors={['rgba(0,0,0,0.5)', 'rgba(0,0,0,0)']}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 0, y: 0 }}
+                style={styles.container}
             >
-                <Action
-                    name="circle"
-                    color="#fff"
-                    size={80}
-                    onPress={onPress}
-                />
-            </OpacityIn>
+                <Action name="circle" color="#fff" size={80}
+                    onPress={onPress}/>
+            </LinearGradient>
         )
+    }
+}
+
+const styles = {
+    container: {
+        position: 'absolute',
+        bottom: 0,
+        height: 0.27 * height,
+        width,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 }
 

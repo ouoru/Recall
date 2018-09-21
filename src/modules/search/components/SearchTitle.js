@@ -4,16 +4,14 @@ import { View, Text, Dimensions } from 'react-native'
 const { width } = Dimensions.get('window')
 const HEADER_HEIGHT = 34
 
-class SectionTitle extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <View style={styles.line}/>
-                <Text style={styles.text}>{this.props.children}</Text>
-                <View style={styles.line}/>
-            </View>
-        )
-    }
+const SearchTitle = ({section: {title}}) => {
+    return (
+        <View style={styles.container}>
+            <View style={styles.line}/>
+            <Text style={styles.text}>{title}</Text>
+            <View style={styles.line}/>
+        </View>
+    )
 }
 
 const styles = {
@@ -41,4 +39,4 @@ const styles = {
     },
 }
 
-export default SectionTitle
+export default SearchTitle

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { View, TextInput } from 'react-native'
+import { TextInput } from 'react-native'
 import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/Feather'
+
 import Action from '../components/Action'
 import LinearGradient from 'react-native-linear-gradient'
 
 import { updateSearchText, updateSearchFocus } from './SearchReducer'
+import { toggleCamera, toggleFlash } from '../camera/CameraReducer'
 
 class SearchBar extends Component {
     constructor(props) {
@@ -44,7 +45,9 @@ class SearchBar extends Component {
     }
 
     render() {
-        const { searchFocused, searchText } = this.props
+        const { camera, flash,
+            toggleCamera, toggleFlash,
+            searchFocused, searchText } = this.props
         
         return (
             <LinearGradient 
@@ -53,8 +56,10 @@ class SearchBar extends Component {
                 end={{ x: 0, y: 1 }}
                 style={[styles.container, searchText || searchFocused ? {} : styles.bottomBorder]}
             >
-                <Action name="user" color="#fff" size={25} style={{ marginRight: 10 }} onPress={this._openDrawer}/>
-                <Action name="search" color="#fff" size={22} onPress={this._focus}/>
+                <Action name="user" color="#fff" size={25} style={{marginRight: 10}}
+                    onPress={this._openDrawer}/>
+                <Action name="search" color="#fff" size={22}
+                    onPress={this._focus}/>
                 <TextInput
                     ref={'textInput'}
                     value={this.state.searchText}
@@ -74,8 +79,10 @@ class SearchBar extends Component {
                     autoCorrect={false}
                     underlineColorAndroid={'transparent'}
                 />
-                <Icon name="zap" color="#fff" size={22} style={{ marginRight: 20 }}/>
-                <Icon name="camera" color="#fff" size={25}/>
+                <Action name="zap" color={flash?"#fff":"#e6e6e6"} size={22} style={{marginRight: 20}}
+                    onPress={toggleFlash}/>
+                <Action name="camera" color="#fff" size={25}
+                    onPress={toggleCamera}/>
             </LinearGradient>
         )
     }
@@ -100,8 +107,10 @@ const styles = {
 
 export default connect(
     state => ({
+        camera: state.camera.camera,
+        flash: state.camera.flash,
         searchText: state.search.searchText,
         searchFocused: state.search.searchFocused,
     }),
-    { updateSearchText, updateSearchFocus }
+    { updateSearchText, updateSearchFocus, toggleCamera, toggleFlash }
 )(SearchBar)

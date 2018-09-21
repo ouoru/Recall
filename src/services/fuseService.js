@@ -1,24 +1,27 @@
 import Fuse from 'fuse.js'
 
 class FuseService{
-    constructor(){
-        this.fuse = null
-        this.options = {
+    update(item, photos) {
+        let options = {
             shouldSort: true,
-            includeScore: true,
             threshold: 0.3,
             maxPatternLength: 15,
             keys: ['keywords'],
         }
+
+        this.fuse = new Fuse([...photos, item], options)
     }
 
-    update(item, photos) {
-        this.fuse = new Fuse([...photos, item], this.options)
-    }
-
-    search(text, photos) {
+    searchPhotos(library, text) {
+        let options = {
+            shouldSort: true,
+            threshold: 0.3,
+            maxPatternLength: 15,
+            keys: ['keywords'],
+        }
+        
         if (!this.fuse) {
-            this.fuse = new Fuse(photos, this.options)
+            this.fuse = new Fuse(library.photos, options)
         }
         return this.fuse.search(text)
     }
