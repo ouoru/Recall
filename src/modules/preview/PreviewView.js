@@ -143,7 +143,6 @@ const styles = {
         position: 'absolute',
         height, width,
         justifyContent: 'center',
-        backgroundColor: '#000',
     },
     darken: {
         height, width,

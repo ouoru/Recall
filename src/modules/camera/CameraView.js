@@ -12,14 +12,19 @@ import { showPhotoModal } from './CameraReducer'
 const { height, width } = Dimensions.get('window')
 
 class CameraView extends Component {
+    constructor(props) {
+        super(props)
+        this.cameraRef = React.createRef();
+    }
+
     _takePicture = async () => {
-        if (this.refs.camera) {
+        if (this.cameraRef) {
             const options = {
                 quality: 0.5,
                 fixOrientation: true,
                 skipProcessing: true
             };
-            const data = await this.refs.camera.takePictureAsync(options)
+            const data = await this.cameraRef.current.takePictureAsync(options)
             this.props.showPhotoModal(data, Date.now())
             this.props.navigation.navigate('Preview')
         }
@@ -31,7 +36,7 @@ class CameraView extends Component {
         return (
             <View style={styles.container}>
                 <RNCamera
-                    ref={'camera'}
+                    ref={this.cameraRef}
                     style={styles.camera}
                     type={camera ? RNCamera.Constants.Type.back : RNCamera.Constants.Type.front}
                     flashMode={flash ? RNCamera.Constants.FlashMode.on : RNCamera.Constants.FlashMode.off}

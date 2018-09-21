@@ -36,6 +36,9 @@ const HomeNav = createStackNavigator(
     {
         headerMode: 'none',
         transitionConfig: config,
+        cardStyle: {
+            backgroundColor: 'transparent'
+        }
     }
 )
 
