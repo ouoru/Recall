@@ -35,15 +35,13 @@ class PreviewView extends Component {
     }
 
     _savePhoto = () => {
+        this.props.navigation.goBack()
         this.props.savePhoto(
             this.props.photoData.uri,
             this.state.keywords,
             this.props.photoData.timestamp
         )
         this.props.hidePhotoModal()
-        this.setState({
-            keywords: null
-        })
     }
 
     render() {

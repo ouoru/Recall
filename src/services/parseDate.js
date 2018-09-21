@@ -24,5 +24,5 @@ export function filterPastWeek(library, text) {
     var week = 7 * 24 * 60 * 60 * 1000
     var weekAgo = Date.now() - week
     console.log(_.sortBy(_.filter(library.photos, a => a.timestamp > weekAgo), b => b.timestamp))
-    return _.sortBy(_.filter(library.photos, a => a.timestamp > weekAgo), b => b.timestamp)
+    return _.sortBy(_.filter(library.photos, a => a.timestamp > weekAgo), b => -b.timestamp)
 }

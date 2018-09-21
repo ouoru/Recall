@@ -20,6 +20,8 @@ class SearchResults extends Component {
         const { searchText, library } = newProps
         if (newProps.searchText !== this.props.searchText) {
             this._update(library, searchText)
+        } else if (newProps.searchFocused !== this.props.searchFocused) {
+            this._update(library, searchText)
         }
     }
 
