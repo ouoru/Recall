@@ -7,7 +7,7 @@ import SearchBar from '../search/SearchBar';
 import SearchResults from '../search/SearchResults';
 import Aperture from './components/Aperture'
 
-import { showPhotoModal } from './CameraReducer'
+import { passPhotoData, passVideoData } from './CameraReducer'
 
 const { height, width } = Dimensions.get('window')
 
@@ -15,18 +15,42 @@ class CameraView extends Component {
     constructor(props) {
         super(props)
         this.cameraRef = React.createRef();
+        this.isLongPress = false
     }
 
     _takePicture = async () => {
+        this.isLongPress = false
         if (this.cameraRef) {
             const options = {
                 quality: 0.5,
                 fixOrientation: true,
-                skipProcessing: true
+                skipProcessing: true,
+                mirrorImage: !this.props.camera,
             };
             const data = await this.cameraRef.current.takePictureAsync(options)
-            this.props.showPhotoModal(data, Date.now())
+            //this.cameraRef.current.pausePreview()
+            this.props.passPhotoData(data)
             this.props.navigation.navigate('Preview')
+        }
+    }
+
+    _startVideo = async () => {
+        this.isLongPress = true
+        if (this.cameraRef) {
+            const options = {
+                maxDuration: 8,
+                mirrorVideo: !this.props.camera,
+                mute: true,
+            };
+            const data = await this.cameraRef.current.recordAsync(options)
+            this.props.passVideoData(data)
+            this.props.navigation.navigate('Video')
+        }
+    }
+
+    _onPressOut = () => {
+        if (this.isLongPress) {
+            this.cameraRef.current.stopRecording()
         }
     }
 
@@ -43,7 +67,7 @@ class CameraView extends Component {
                     permissionDialogTitle={'Permission to use camera'}
                     permissionDialogMessage={'We need your permission to use your camera phone'}
                 />
-                <Aperture onPress={this._takePicture}/>
+                <Aperture onPress={this._takePicture} onLongPress={this._startVideo} onPressOut={this._onPressOut}/>
                 <SearchResults/>
                 <SearchBar navigation={this.props.navigation}/>
             </View>
@@ -67,7 +91,7 @@ const styles = {
 export default connect(
     state => ({
         camera: state.camera.camera,
-        flash: state.camera.flash
+        flash: state.camera.flash,
     }),
-    { showPhotoModal }
+    { passPhotoData, passVideoData }
 )(CameraView)

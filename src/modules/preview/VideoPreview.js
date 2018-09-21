@@ -11,6 +11,7 @@ import {
     TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
+import Video from 'react-native-video'
 
 import Action from '../components/Action'
 
@@ -21,7 +22,7 @@ const { height, width } = Dimensions.get('window')
 const LEFT_MARGIN = 30
 const BASE_Y = StatusBar.currentHeight + 25
 
-class PreviewView extends Component {
+class VideoPreview extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -106,21 +107,23 @@ class PreviewView extends Component {
     _savePhoto = () => {
         this.props.navigation.goBack()
         this.props.savePhoto(
-            this.props.photoData.uri,
+            this.props.videoData.uri,
             this.state.keywords,
-            this.props.photoData.timestamp
+            this.props.videoData.timestamp
         )
         this.props.hidePhotoModal()
     }
 
     render() {
-        const { photoData } = this.props
+        const { videoData } = this.props
 
         return (
-            <ImageBackground
-                source={{ uri: photoData.uri }}
-                style={styles.container}
-            >
+            <View style={styles.container}>
+                <Video
+                    source={{ uri: videoData.uri }}
+                    style={styles.container}
+                    repeat={true}
+                />
                 <TouchableOpacity
                     activeOpacity={1}
                     style={styles.darken}
@@ -136,7 +139,7 @@ class PreviewView extends Component {
                         }}
                     >
                         <Text style={styles.titleText}>
-                            {'Tag\nyour Photo.'}
+                            {'Tag\nyour Video.'}
                         </Text>
                         <View style={styles.inputStyle}>
                             <TextInput
@@ -161,7 +164,7 @@ class PreviewView extends Component {
                         </View>
                     </Animated.View>
                 </TouchableOpacity>
-            </ImageBackground>
+            </View>
         )
     }
 }
@@ -173,6 +176,9 @@ const styles = {
         justifyContent: 'center',
     },
     darken: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
         height, width,
         justifyContent: 'center',
         backgroundColor: 'rgba(0,0,0,0.4)',
@@ -194,7 +200,7 @@ const styles = {
 
 export default connect(
     state => ({
-        photoData: state.camera.photoData,
+        videoData: state.camera.videoData,
     }),
     { hidePhotoModal, savePhoto }
-)(PreviewView)
+)(VideoPreview)

@@ -9,7 +9,7 @@ const { height, width } = Dimensions.get('window')
 
 class Aperture extends Component {
     render() {
-        const { searchText, searchFocused, onPress } = this.props
+        const { onPress, onLongPress, onPressOut } = this.props
 
         return (
             
@@ -20,7 +20,7 @@ class Aperture extends Component {
                 style={styles.container}
             >
                 <Action name="circle" color="#fff" size={80}
-                    onPress={onPress}/>
+                    onPress={onPress} onLongPress={onLongPress} delayLongPress={200} onPressOut={onPressOut}/>
             </LinearGradient>
         )
     }
