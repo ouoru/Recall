@@ -40,6 +40,5 @@ const styles = {
 export default connect(
     state => ({
         searchText: state.search.searchText,
-        searchFocused: state.search.searchFocused,
     })
 )(Aperture)

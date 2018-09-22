@@ -20,9 +20,7 @@ class FuseService{
             keys: ['keywords'],
         }
         
-        if (!this.photoFuse) {
-            this.photoFuse = new Fuse(library.photos, options)
-        }
+        this.photoFuse = new Fuse(library.photos, options)
         return this.photoFuse.search(text)
     }
 
@@ -34,9 +32,7 @@ class FuseService{
             keys: ['keywords'],
         }
         
-        if (!this.videoFuse) {
-            this.videoFuse = new Fuse(library.videos, options)
-        }
+        this.videoFuse = new Fuse(library.videos, options)
         return this.videoFuse.search(text)
     }
 }

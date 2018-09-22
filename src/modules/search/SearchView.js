@@ -17,11 +17,11 @@ class SearchView extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        const { searchText, searchFocused, library } = newProps
+        const { searchText, showSearchView, library } = newProps
         
         if (searchText !== this.props.searchText) {
             this._update(library, searchText)
-        } else if (searchFocused !== this.props.searchFocused) {
+        } else if (showSearchView !== this.props.showSearchView) {
             this._update(library, searchText)
         }
     }
@@ -75,7 +75,6 @@ const styles = {
 export default connect(
     state => ({
         searchText: state.search.searchText,
-        searchFocused: state.search.searchFocused,
         searchResults: state.search.searchResults,
         library: state.library,
         showSearchView: state.search.showSearchView

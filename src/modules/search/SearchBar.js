@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Action from '../components/Action'
 import LinearGradient from 'react-native-linear-gradient'
 
-import { updateSearchText, updateSearchFocus } from './SearchReducer'
+import { updateSearchText, onSearchBarFocused, hideSearchView } from './SearchReducer'
 import { toggleCamera, toggleFlash } from '../camera/CameraReducer'
 
 class SearchBar extends Component {
@@ -18,47 +18,38 @@ class SearchBar extends Component {
 
     componentWillReceiveProps(newProps) {
         if (!newProps.showSearchView && this.props.showSearchView) {
-            this._blurSearchBar()
-        } 
+            this._onChangeText()
+            this.refs.textInput.blur()
+        }
     }
 
-    _openDrawer = () => {
-        this.props.navigation.openDrawer()
-    }
-
-    _onChangeText = text => {
+    _onChangeText = (text = '') => {
         this.setState({
             searchText: text
         })
         this.props.updateSearchText(text)
     }
 
+    _onOptionPress = () => {
+        if (this.props.showSearchView) {
+            return this.props.hideSearchView()
+        }
+        //TODO menu logic
+    }
+
     _focusSearchBar = () => {
         this.refs.textInput.focus()
     }
 
-    _blurSearchBar = () => {
-        this.refs.textInput.blur()
-    }
-
     _onFocus = () => {
-        this.props.updateSearchFocus(true)
-    }
-    
-    _onBlur = () => {
-        this.props.updateSearchFocus(false)
-        if (this.state.searchText) {
-            
-        } else {
-            this._onChangeText('')
-        }
+        this.props.onSearchBarFocused(true)
     }
 
     render() {
         const { camera, flash,
             toggleCamera, toggleFlash,
-            showPreview,
-            searchFocused, searchText } = this.props
+            showPreview, showSearchView
+        } = this.props
 
         if (showPreview) return null
         
@@ -67,17 +58,18 @@ class SearchBar extends Component {
                 colors={['rgba(0,0,0,0.5)', 'rgba(0,0,0,0)']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
-                style={[styles.container, searchText || searchFocused ? {} : styles.bottomBorder]}
+                style={[styles.container,
+                    !showSearchView && styles.bottomBorder,
+                ]}
             >
-                <Action name="user" color="#fff" size={25} style={{marginRight: 10}}
-                    onPress={this._openDrawer}/>
+                <Action name={showSearchView?"x":"menu"} color="#fff" size={25} style={{marginRight: 10}}
+                    onPress={this._onOptionPress}/>
                 <Action name="search" color="#fff" size={22}
                     onPress={this._focusSearchBar}/>
                 <TextInput
                     ref={'textInput'}
                     value={this.state.searchText}
                     onFocus={this._onFocus}
-                    onBlur={this._onBlur}
                     onChangeText={this._onChangeText}
                     style={{
                         flex: 1,
@@ -125,8 +117,7 @@ export default connect(
 
         showPreview: state.camera.showPreview,
         searchText: state.search.searchText,
-        searchFocused: state.search.searchFocused,
         showSearchView: state.search.showSearchView,
     }),
-    { updateSearchText, updateSearchFocus, toggleCamera, toggleFlash }
+    { updateSearchText, onSearchBarFocused, hideSearchView, toggleCamera, toggleFlash }
 )(SearchBar)
