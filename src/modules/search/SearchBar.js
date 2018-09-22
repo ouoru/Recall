@@ -16,6 +16,12 @@ class SearchBar extends Component {
         }
     }
 
+    componentWillReceiveProps(newProps) {
+        if (!newProps.showSearchView && this.props.showSearchView) {
+            this._blurSearchBar()
+        } 
+    }
+
     _openDrawer = () => {
         this.props.navigation.openDrawer()
     }
@@ -27,8 +33,12 @@ class SearchBar extends Component {
         this.props.updateSearchText(text)
     }
 
-    _focus = () => {
+    _focusSearchBar = () => {
         this.refs.textInput.focus()
+    }
+
+    _blurSearchBar = () => {
+        this.refs.textInput.blur()
     }
 
     _onFocus = () => {
@@ -62,7 +72,7 @@ class SearchBar extends Component {
                 <Action name="user" color="#fff" size={25} style={{marginRight: 10}}
                     onPress={this._openDrawer}/>
                 <Action name="search" color="#fff" size={22}
-                    onPress={this._focus}/>
+                    onPress={this._focusSearchBar}/>
                 <TextInput
                     ref={'textInput'}
                     value={this.state.searchText}
@@ -116,6 +126,7 @@ export default connect(
         showPreview: state.camera.showPreview,
         searchText: state.search.searchText,
         searchFocused: state.search.searchFocused,
+        showSearchView: state.search.showSearchView,
     }),
     { updateSearchText, updateSearchFocus, toggleCamera, toggleFlash }
 )(SearchBar)

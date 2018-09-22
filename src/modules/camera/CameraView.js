@@ -8,6 +8,7 @@ import SearchView from '../search/SearchView';
 import Aperture from './components/Aperture'
 
 import { passPhotoData, passVideoData } from './CameraReducer'
+import Explore from '../navigation/Explore'
 
 const { height, width } = Dimensions.get('window')
 
@@ -30,7 +31,7 @@ class CameraView extends Component {
             const data = await this.cameraRef.current.takePictureAsync(options)
             //this.cameraRef.current.pausePreview()
             this.props.passPhotoData(data)
-            this.props.navigation.navigate('Photo')
+            Explore.navigate('Photo')
         }
     }
 
@@ -43,7 +44,7 @@ class CameraView extends Component {
             };
             const data = await this.cameraRef.current.recordAsync(options)
             this.props.passVideoData(data)
-            this.props.navigation.navigate('Video')
+            Explore.navigate('Video')
         }
     }
 

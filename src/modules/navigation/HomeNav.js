@@ -20,7 +20,6 @@ const config = () => {
     return {
         // Define scene interpolation, eq. custom transition
         screenInterpolator: (sceneProps) => {
-
             const {position, scene} = sceneProps;
             const {index} = scene;
 

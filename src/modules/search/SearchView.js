@@ -13,19 +13,17 @@ class SearchView extends Component {
         super(props)
         this.state = {
             sectionData: [],
-            showResults: props.searchFocused || props.searchText,
         }
     }
 
     componentWillReceiveProps(newProps) {
         const { searchText, searchFocused, library } = newProps
-        if (newProps.searchText !== this.props.searchText) {
+        
+        if (searchText !== this.props.searchText) {
             this._update(library, searchText)
-        } else if (newProps.searchFocused !== this.props.searchFocused) {
+        } else if (searchFocused !== this.props.searchFocused) {
             this._update(library, searchText)
         }
-
-        if (searchFocused) this.setState({ showResults: true })
     }
 
     _update(library, searchText) {
@@ -47,7 +45,7 @@ class SearchView extends Component {
     render() {
         return (
             <OpacityIn
-                visible={this.state.showResults}
+                visible={this.props.showSearchView}
                 style={styles.container}
             >
                 <SectionList
@@ -80,5 +78,6 @@ export default connect(
         searchFocused: state.search.searchFocused,
         searchResults: state.search.searchResults,
         library: state.library,
+        showSearchView: state.search.showSearchView
     })
 )(SearchView)
