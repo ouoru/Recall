@@ -41,10 +41,6 @@ class SearchBar extends Component {
         this.refs.textInput.focus()
     }
 
-    _onFocus = () => {
-        this.props.onSearchBarFocused(true)
-    }
-
     render() {
         const { camera, flash,
             toggleCamera, toggleFlash,
@@ -69,7 +65,7 @@ class SearchBar extends Component {
                 <TextInput
                     ref={'textInput'}
                     value={this.state.searchText}
-                    onFocus={this._onFocus}
+                    onFocus={this.props.onSearchBarFocused}
                     onChangeText={this._onChangeText}
                     style={{
                         flex: 1,

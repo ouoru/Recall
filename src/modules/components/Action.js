@@ -7,7 +7,7 @@ class Action extends Component {
         const { name, color, size } = this.props
         return (
             <TouchableOpacity
-                hitSlop={{ left: 15, right: 15, top: 10, bottom: 10 }}
+                hitSlop={{ left: 5, right: 5, top: 10, bottom: 10 }}
                 activeOpacity={0.5}
                 {...this.props}
             >

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { SectionList } from 'react-native'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import OpacityIn from '../animate/OpacityIn'
 import SearchResult from './components/SearchResult'
@@ -36,6 +37,10 @@ class SearchView extends Component {
                 renderItem: SECTIONS[i].renderItem || null,
             })
         }
+
+        //TODO empty section logic
+        //currently just removes sections with data=[]
+        _.remove(newData, a => !a.data.length)
 
         this.setState({
             sectionData: newData
