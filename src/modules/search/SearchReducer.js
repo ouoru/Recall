@@ -1,3 +1,5 @@
+import fuseService from "../../services/fuseService";
+
 const initialState = {
     searchText: '',
     searchFocused: false,
@@ -16,7 +18,13 @@ export function updateSearchText(text) {
 }
 
 export function updateSearchFocus(focused) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const {library} = getState()
+
+        if (focused) {
+            fuseService.initialSearch(library)
+        }
+        
         dispatch({
             type: UPDATE_SEARCH_FOCUS,
             payload: focused

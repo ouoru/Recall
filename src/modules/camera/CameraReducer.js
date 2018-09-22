@@ -1,17 +1,15 @@
 const initialState = {
-    photoTaken: false,
+    showPreview: false,
     photoData: {},
-
-    videoTaken: false,
     videoData: {},
 
     flash: false,
     camera: true, //true -> back, false -> front
 }
 
-const SHOW_PHOTO_MODAL = 'camera/show-photo-modal'
-const HIDE_PHOTO_MODAL = 'camera/hide-photo-modal'
+const PASS_PHOTO_DATA = 'camera/show-photo-modal'
 const PASS_VIDEO_DATA = 'camera/pass-video-data'
+const HIDE_PREVIEW = 'camera/close-preview'
 
 const TOGGLE_FLASH = 'camera/toggle-flash'
 const TOGGLE_CAMERA = 'camera/toggle-camera'
@@ -22,7 +20,7 @@ const CAMERA_VIDEO = 'type/video'
 export function passPhotoData(data) {
     return (dispatch) => {
         dispatch({
-            type: SHOW_PHOTO_MODAL,
+            type: PASS_PHOTO_DATA,
             payload: {
                 uri: data.uri,
                 type: CAMERA_PHOTO,
@@ -45,10 +43,10 @@ export function passVideoData(data) {
     }
 }
 
-export function hidePhotoModal() {
+export function hidePreview() {
     return (dispatch) => {
         dispatch({
-            type: HIDE_PHOTO_MODAL
+            type: HIDE_PREVIEW
         })
     }
 }
@@ -71,12 +69,13 @@ export function toggleCamera() {
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case SHOW_PHOTO_MODAL:
-            return { ...state, photoTaken: true, photoData: action.payload }
-        case HIDE_PHOTO_MODAL:
-            return { ...state, photoTaken: false, photoData: {} }
+        case PASS_PHOTO_DATA:
+            return { ...state, showPreview: true, photoData: action.payload }
         case PASS_VIDEO_DATA:
-            return { ...state, videoTaken: true, videoData: action.payload }
+            return { ...state, showPreview: true, videoData: action.payload }
+        case HIDE_PREVIEW:
+            return { ...state, showPreview: false }
+
         case TOGGLE_FLASH:
             return { ...state, flash: !state.flash }
         case TOGGLE_CAMERA:

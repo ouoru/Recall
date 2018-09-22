@@ -9,6 +9,11 @@ export const SECTIONS = [
         filterUsing: fuseService.searchPhotos,
     },
     {
+        key: 'MY VIDEOS',
+        title: 'MY VIDEOS',
+        filterUsing: fuseService.searchVideos,
+    },
+    {
         key: 'PAST WEEK',
         title: 'PAST WEEK',
         filterUsing: filterPastWeek,

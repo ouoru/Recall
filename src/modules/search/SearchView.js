@@ -8,21 +8,24 @@ import SearchTitle from './components/SearchTitle'
 
 import { SECTIONS } from './SearchOptions'
 
-class SearchResults extends Component {
+class SearchView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            sectionData: []
+            sectionData: [],
+            showResults: props.searchFocused || props.searchText,
         }
     }
 
     componentWillReceiveProps(newProps) {
-        const { searchText, library } = newProps
+        const { searchText, searchFocused, library } = newProps
         if (newProps.searchText !== this.props.searchText) {
             this._update(library, searchText)
         } else if (newProps.searchFocused !== this.props.searchFocused) {
             this._update(library, searchText)
         }
+
+        if (searchFocused) this.setState({ showResults: true })
     }
 
     _update(library, searchText) {
@@ -44,7 +47,7 @@ class SearchResults extends Component {
     render() {
         return (
             <OpacityIn
-                visible={this.props.searchFocused || this.props.searchText}
+                visible={this.state.showResults}
                 style={styles.container}
             >
                 <SectionList
@@ -78,4 +81,4 @@ export default connect(
         searchResults: state.search.searchResults,
         library: state.library,
     })
-)(SearchResults)
+)(SearchView)

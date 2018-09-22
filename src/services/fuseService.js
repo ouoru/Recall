@@ -1,15 +1,15 @@
 import Fuse from 'fuse.js'
 
 class FuseService{
-    update(item, photos) {
+    initialSearch(library) {
         let options = {
             shouldSort: true,
             threshold: 0.3,
             maxPatternLength: 15,
             keys: ['keywords'],
         }
-
-        this.fuse = new Fuse([...photos, item], options)
+        this.photoFuse = new Fuse(library.photos, options)
+        this.videoFuse = new Fuse(library.videos, options)
     }
 
     searchPhotos(library, text) {
@@ -20,10 +20,24 @@ class FuseService{
             keys: ['keywords'],
         }
         
-        if (!this.fuse) {
-            this.fuse = new Fuse(library.photos, options)
+        if (!this.photoFuse) {
+            this.photoFuse = new Fuse(library.photos, options)
         }
-        return this.fuse.search(text)
+        return this.photoFuse.search(text)
+    }
+
+    searchVideos(library, text) {
+        let options = {
+            shouldSort: true,
+            threshold: 0.3,
+            maxPatternLength: 15,
+            keys: ['keywords'],
+        }
+        
+        if (!this.videoFuse) {
+            this.videoFuse = new Fuse(library.videos, options)
+        }
+        return this.videoFuse.search(text)
     }
 }
 

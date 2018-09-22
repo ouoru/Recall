@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { RNCamera } from 'react-native-camera'
 
 import SearchBar from '../search/SearchBar';
-import SearchResults from '../search/SearchResults';
+import SearchView from '../search/SearchView';
 import Aperture from './components/Aperture'
 
 import { passPhotoData, passVideoData } from './CameraReducer'
@@ -30,7 +30,7 @@ class CameraView extends Component {
             const data = await this.cameraRef.current.takePictureAsync(options)
             //this.cameraRef.current.pausePreview()
             this.props.passPhotoData(data)
-            this.props.navigation.navigate('Preview')
+            this.props.navigation.navigate('Photo')
         }
     }
 
@@ -40,7 +40,6 @@ class CameraView extends Component {
             const options = {
                 maxDuration: 8,
                 mirrorVideo: !this.props.camera,
-                mute: true,
             };
             const data = await this.cameraRef.current.recordAsync(options)
             this.props.passVideoData(data)
@@ -68,7 +67,7 @@ class CameraView extends Component {
                     permissionDialogMessage={'We need your permission to use your camera phone'}
                 />
                 <Aperture onPress={this._takePicture} onLongPress={this._startVideo} onPressOut={this._onPressOut}/>
-                <SearchResults/>
+                <SearchView/>
                 <SearchBar navigation={this.props.navigation}/>
             </View>
         )

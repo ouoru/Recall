@@ -15,8 +15,8 @@ import Video from 'react-native-video'
 
 import Action from '../components/Action'
 
-import { hidePhotoModal } from '../camera/CameraReducer'
-import { savePhoto } from '../library/LibraryReducer'
+import { hidePreview } from '../camera/CameraReducer'
+import { saveVideo } from '../library/LibraryReducer'
 
 const { height, width } = Dimensions.get('window')
 const LEFT_MARGIN = 30
@@ -90,7 +90,7 @@ class VideoPreview extends Component {
 
     _goBack = () => {
         this.props.navigation.goBack()
-        this.props.hidePhotoModal()
+        this.props.hidePreview()
     }
 
     _onChangeText = text => {
@@ -106,12 +106,12 @@ class VideoPreview extends Component {
 
     _savePhoto = () => {
         this.props.navigation.goBack()
-        this.props.savePhoto(
+        this.props.saveVideo(
             this.props.videoData.uri,
             this.state.keywords,
             this.props.videoData.timestamp
         )
-        this.props.hidePhotoModal()
+        this.props.hidePreview()
     }
 
     render() {
@@ -202,5 +202,5 @@ export default connect(
     state => ({
         videoData: state.camera.videoData,
     }),
-    { hidePhotoModal, savePhoto }
+    { hidePreview, saveVideo }
 )(VideoPreview)

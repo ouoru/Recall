@@ -14,14 +14,14 @@ import { connect } from 'react-redux'
 
 import Action from '../components/Action'
 
-import { hidePhotoModal } from '../camera/CameraReducer'
+import { hidePreview } from '../camera/CameraReducer'
 import { savePhoto } from '../library/LibraryReducer'
 
 const { height, width } = Dimensions.get('window')
 const LEFT_MARGIN = 30
 const BASE_Y = StatusBar.currentHeight + 25
 
-class PreviewView extends Component {
+class PhotoView extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -89,7 +89,7 @@ class PreviewView extends Component {
 
     _goBack = () => {
         this.props.navigation.goBack()
-        this.props.hidePhotoModal()
+        this.props.hidePreview()
     }
 
     _onChangeText = text => {
@@ -110,7 +110,7 @@ class PreviewView extends Component {
             this.state.keywords,
             this.props.photoData.timestamp
         )
-        this.props.hidePhotoModal()
+        this.props.hidePreview()
     }
 
     render() {
@@ -196,5 +196,5 @@ export default connect(
     state => ({
         photoData: state.camera.photoData,
     }),
-    { hidePhotoModal, savePhoto }
-)(PreviewView)
+    { hidePreview, savePhoto }
+)(PhotoView)

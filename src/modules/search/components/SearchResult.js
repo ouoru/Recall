@@ -6,7 +6,7 @@ import { stampToDate } from '../../../services/parseDate';
 const { height, width } = Dimensions.get('window')
 const PHOTO_SIZE = width / 5
 
-const SearchResult = ({item, score}) => {
+const SearchResult = ({item}) => {
     return (
         <TouchableOpacity
             key={item.timestamp}
@@ -16,10 +16,12 @@ const SearchResult = ({item, score}) => {
                 marginBottom: 2,
             }}
         >
-            <Image
-                source={{ uri: item.uri }}
-                style={styles.photoDim}
-            />
+            <View>
+                <Image
+                    source={{ uri: item.uri }}
+                    style={styles.photoDim}
+                />
+            </View>
             <View style={styles.textContainer}>
                 <Text style={styles.keywordsStyle}>{item.keywords}</Text>
                 <Text style={styles.dateStyle}>{item.timestamp && stampToDate(item.timestamp)}</Text>

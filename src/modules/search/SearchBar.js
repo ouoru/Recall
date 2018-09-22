@@ -12,7 +12,7 @@ class SearchBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            searchText: null
+            searchText: null,
         }
     }
 
@@ -47,10 +47,10 @@ class SearchBar extends Component {
     render() {
         const { camera, flash,
             toggleCamera, toggleFlash,
-            photoTaken,
+            showPreview,
             searchFocused, searchText } = this.props
 
-        if (photoTaken) return null
+        if (showPreview) return null
         
         return (
             <LinearGradient 
@@ -113,7 +113,7 @@ export default connect(
         camera: state.camera.camera,
         flash: state.camera.flash,
 
-        photoTaken: state.camera.photoTaken,
+        showPreview: state.camera.showPreview,
         searchText: state.search.searchText,
         searchFocused: state.search.searchFocused,
     }),

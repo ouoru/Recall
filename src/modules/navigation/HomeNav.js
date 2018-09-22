@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation'
 
 import CameraView from '../camera/CameraView'
-import PreviewView from '../preview/PreviewView'
+import PhotoView from '../preview/PhotoView'
 import VideoPreview from '../preview/VideoPreview'
 
 const opacity = (index, position) => {
@@ -32,7 +32,7 @@ const config = () => {
 const HomeNav = createStackNavigator(
     {
         Camera: { screen: CameraView },
-        Preview: { screen: PreviewView },
+        Photo: { screen: PhotoView },
         Video: { screen: VideoPreview },
     },
     {
