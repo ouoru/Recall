@@ -1,25 +1,40 @@
 import React, { Component } from 'react'
-import { TextInput } from 'react-native'
+import { TextInput, Animated } from 'react-native'
 import { connect } from 'react-redux'
 
 import Action from '../components/Action'
+import LottiePress from '../components/LottiePress'
 import LinearGradient from 'react-native-linear-gradient'
 
 import { updateSearchText, onSearchBarFocused, hideSearchView } from './SearchReducer'
 import { toggleCamera, toggleFlash } from '../camera/CameraReducer'
+import menuAndClose from '../../assets/animations/menuAndClose.json'
+
+const ANIM_START = 0.13
+const ANIM_END = 0.4
 
 class SearchBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
             searchText: null,
+            animProgress: new Animated.Value(ANIM_START),
         }
     }
 
     componentWillReceiveProps(newProps) {
-        if (!newProps.showSearchView && this.props.showSearchView) {
-            this._onChangeText()
-            this.refs.textInput.blur()
+        if (newProps.showSearchView !== this.props.showSearchView) {
+            Animated.timing(
+                this.state.animProgress, {
+                    toValue: newProps.showSearchView ? ANIM_END : ANIM_START,
+                    duration: 400,
+                    useNativeDriver: true
+                }
+            ).start()
+            if (!newProps.showSearchView) {
+                this._onChangeText()
+                this.refs.textInput.blur()
+            }
         }
     }
 
@@ -58,8 +73,11 @@ class SearchBar extends Component {
                     !showSearchView && styles.bottomBorder,
                 ]}
             >
-                <Action name={showSearchView?"x":"menu"} color="#fff" size={25} style={{marginRight: 10}}
-                    onPress={this._onOptionPress}/>
+                <LottiePress source={menuAndClose} progress={this.state.animProgress}
+                    style={{height: 30, width: 30, marginRight: 10}}
+                    animStyle={{height: 220, width: 220}}
+                    onPress={this._onOptionPress}
+                />
                 <Action name="search" color="#fff" size={22}
                     onPress={this._focusSearchBar}/>
                 <TextInput
