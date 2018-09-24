@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TextInput, Animated } from 'react-native'
+import { View, TextInput, Animated } from 'react-native'
 import { connect } from 'react-redux'
 
 import Action from '../components/Action'
@@ -65,14 +65,7 @@ class SearchBar extends Component {
         if (showPreview) return null
         
         return (
-            <LinearGradient 
-                colors={['rgba(0,0,0,0.5)', 'rgba(0,0,0,0)']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
-                style={[styles.container,
-                    !showSearchView && styles.bottomBorder,
-                ]}
-            >
+            <View style={styles.container}>
                 <LottiePress source={menuAndClose} progress={this.state.animProgress}
                     style={{height: 30, width: 30, marginRight: 10}}
                     animStyle={{height: 220, width: 220}}
@@ -102,7 +95,7 @@ class SearchBar extends Component {
                     onPress={toggleFlash}/>
                 <Action name="camera" color="#fff" size={25}
                     onPress={toggleCamera}/>
-            </LinearGradient>
+            </View>
         )
     }
 }
@@ -117,6 +110,7 @@ const styles = {
         paddingRight: 15,
         flexDirection: 'row',
         alignItems: 'center',
+        backgroundColor: '#000',
     },
     bottomBorder: {
         borderBottomWidth: 1,

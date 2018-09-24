@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { SectionList } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { statusBarMargin } from '../../services/deviceMargin'
 
 import OpacityIn from '../animate/OpacityIn'
 import SearchResult from './components/SearchResult'
@@ -59,7 +60,7 @@ class SearchView extends Component {
                     stickySectionHeadersEnabled={true}
                     sections={this.state.sectionData}
                     keyExtractor={(item, index) => item + index}
-                    contentContainerStyle={{alignItems: 'center'}}
+                    contentContainerStyle={{alignItems: 'center', paddingBottom: 20}}
                     pointerEvents={"box-none"}
                 />
             </OpacityIn>
@@ -70,10 +71,10 @@ class SearchView extends Component {
 const styles = {
     container: {
         position: 'absolute',
-        top: 0, bottom: 0,
+        top: 0, bottom: statusBarMargin(),
         left: 0, right: 0,
-        paddingTop: 50,
-        backgroundColor: 'rgba(0,0,0,0.8)'
+        marginTop: 65,
+        backgroundColor: '#000'
     },
 }
 

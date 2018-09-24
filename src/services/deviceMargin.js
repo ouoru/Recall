@@ -1,6 +1,6 @@
 import { Platform, StatusBar } from 'react-native'
 
-export const androidStatusBarMargin = () => {
+export const statusBarMargin = () => {
     if (Platform.OS === 'android') {
         return StatusBar.currentHeight
     }
