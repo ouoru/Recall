@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Action from '../components/Action'
 import LottiePress from '../components/LottiePress'
-import LinearGradient from 'react-native-linear-gradient'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import { updateSearchText, onSearchBarFocused, hideSearchView } from './SearchReducer'
 import { toggleCamera, toggleFlash } from '../camera/CameraReducer'
@@ -68,7 +68,7 @@ class SearchBar extends Component {
             <View style={styles.container}>
                 <LottiePress source={menuAndClose} progress={this.state.animProgress}
                     style={{height: 30, width: 30, marginRight: 10}}
-                    animStyle={{height: 220, width: 220}}
+                    animStyle={{height: 180, width: 180}}
                     onPress={this._onOptionPress}
                 />
                 <Action name="search" color="#fff" size={22}
@@ -82,7 +82,7 @@ class SearchBar extends Component {
                         flex: 1,
                         color: '#fff',
                         fontFamily: 'Roboto-Regular',
-                        fontSize: 18,
+                        fontSize: 16,
                         marginRight: 5,
                         marginLeft: 5,
                     }}
@@ -91,10 +91,10 @@ class SearchBar extends Component {
                     autoCorrect={false}
                     underlineColorAndroid={'transparent'}
                 />
-                <Action name="zap" color={flash?"#fff":"#e6e6e6"} size={22} style={{marginRight: 20}}
-                    onPress={toggleFlash}/>
-                <Action name="camera" color="#fff" size={25}
-                    onPress={toggleCamera}/>
+                <Action name="ios-flash" color={flash?"#FFDC64":"#e6e6e6"} size={25} style={{marginRight: 20}}
+                    onPress={toggleFlash} VectorType={Ionicons}/>
+                <Action name="ios-reverse-camera" color="#fff" size={28}
+                    onPress={toggleCamera} VectorType={Ionicons}/>
             </View>
         )
     }
