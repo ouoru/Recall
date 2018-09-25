@@ -3,7 +3,6 @@ import { View, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { RNCamera } from 'react-native-camera'
 
-import SearchBar from '../search/SearchBar';
 import SearchView from '../search/SearchView';
 import Aperture from './components/Aperture'
 
@@ -69,7 +68,6 @@ class CameraView extends Component {
                 />
                 <Aperture onPress={this._takePicture} onLongPress={this._startVideo} onPressOut={this._onPressOut}/>
                 <SearchView/>
-                <SearchBar navigation={this.props.navigation}/>
             </View>
         )
     }

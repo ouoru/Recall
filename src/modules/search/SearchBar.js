@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TextInput, Animated } from 'react-native'
+import { TextInput, Animated } from 'react-native'
 import { connect } from 'react-redux'
 
 import Action from '../components/Action'
@@ -8,10 +8,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import { updateSearchText, onSearchBarFocused, hideSearchView } from './SearchReducer'
 import { toggleCamera, toggleFlash } from '../camera/CameraReducer'
+import { statusBarMargin } from '../../services/deviceMargin'
 import menuAndClose from '../../assets/animations/menuAndClose.json'
 
 const ANIM_START = 0.13
 const ANIM_END = 0.4
+const SEARCH_BAR_HEIGHT = 75
 
 class SearchBar extends Component {
     constructor(props) {
@@ -19,6 +21,7 @@ class SearchBar extends Component {
         this.state = {
             searchText: null,
             animProgress: new Animated.Value(ANIM_START),
+            searchBar: new Animated.Value(1)
         }
     }
 
@@ -35,6 +38,16 @@ class SearchBar extends Component {
                 this._onChangeText()
                 this.refs.textInput.blur()
             }
+        }
+
+        if(newProps.showPreview !== this.props.showPreview) {
+            Animated.timing(
+                this.state.searchBar, {
+                    toValue: newProps.showPreview ? 0 : 1,
+                    duration: 250,
+                    useNativeDriver: true
+                }
+            ).start()
         }
     }
 
@@ -59,13 +72,22 @@ class SearchBar extends Component {
     render() {
         const { camera, flash,
             toggleCamera, toggleFlash,
-            showPreview, showSearchView
         } = this.props
-
-        if (showPreview) return null
         
         return (
-            <View style={styles.container}>
+            <Animated.View
+                style={[
+                    styles.container,
+                    {
+                        transform: [
+                            { translateY: this.state.searchBar.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: [-SEARCH_BAR_HEIGHT, 0]
+                            })}
+                        ]
+                    }
+                ]}
+            >
                 <LottiePress source={menuAndClose} progress={this.state.animProgress}
                     style={{height: 30, width: 30, marginRight: 10}}
                     animStyle={{height: 180, width: 180}}
@@ -95,7 +117,7 @@ class SearchBar extends Component {
                     onPress={toggleFlash} VectorType={Ionicons}/>
                 <Action name="ios-reverse-camera" color="#fff" size={28}
                     onPress={toggleCamera} VectorType={Ionicons}/>
-            </View>
+            </Animated.View>
         )
     }
 }
@@ -105,7 +127,8 @@ const styles = {
         position: 'absolute',
         top: 0,
         left: 0, right: 0,
-        height: 65,
+        height: SEARCH_BAR_HEIGHT,
+        paddingTop: statusBarMargin()/2,
         paddingLeft: 15,
         paddingRight: 15,
         flexDirection: 'row',
@@ -122,10 +145,8 @@ export default connect(
     state => ({
         camera: state.camera.camera,
         flash: state.camera.flash,
-
-        showPreview: state.camera.showPreview,
-        searchText: state.search.searchText,
         showSearchView: state.search.showSearchView,
+        showPreview: state.camera.showPreview,
     }),
     { updateSearchText, onSearchBarFocused, hideSearchView, toggleCamera, toggleFlash }
 )(SearchBar)

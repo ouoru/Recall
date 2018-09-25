@@ -4,8 +4,9 @@ import { store, persistor } from '../redux/store';
 import { PersistGate } from 'redux-persist/integration/react'
 import Explore from '../modules/navigation/Explore'
 
-import AndroidHandler from '../modules/components/AndroidHandler'
 import HomeNav from '../modules/navigation/HomeNav';
+import SearchBar from '../modules/search/SearchBar'
+import AndroidHandler from '../modules/components/AndroidHandler'
 
 class App extends Component {
     render(){
@@ -13,9 +14,8 @@ class App extends Component {
             <Provider store = {store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <AndroidHandler/>
-                    <HomeNav ref={navigatorRef => {
-                        Explore.setTopLevelNavigator(navigatorRef)
-                    }}/>
+                    <HomeNav ref={Explore.setTopLevelNavigator}/>
+                    <SearchBar/>
                 </PersistGate>
             </Provider>
         )

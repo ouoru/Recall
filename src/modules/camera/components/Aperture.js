@@ -30,7 +30,7 @@ const styles = {
     container: {
         position: 'absolute',
         bottom: 0,
-        height: 0.27 * height,
+        height: 0.22 * height,
         width,
         justifyContent: 'center',
         alignItems: 'center',

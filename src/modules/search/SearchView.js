@@ -71,7 +71,7 @@ class SearchView extends Component {
 const styles = {
     container: {
         position: 'absolute',
-        top: 0, bottom: statusBarMargin(),
+        top: 0, bottom: 0,
         left: 0, right: 0,
         marginTop: 65,
         backgroundColor: '#000'

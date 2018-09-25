@@ -1,13 +1,6 @@
-import { StatusBar } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
 let _container;
-
-let STATUS_BAR_CONFIG = {
-    Camera: {},
-    Photo: {},
-    Video: {},
-}
 
 function setTopLevelNavigator(container){
     _container = container
@@ -45,7 +38,7 @@ function navigate(routeName){
         }),
     );
 }
-  
+
 function getCurrentRoute(){
     if (!_container || !_container.state.nav) {
         return null;
@@ -53,7 +46,7 @@ function getCurrentRoute(){
 
     return _container.state.nav.routes[_container.state.nav.index] || null;
 }
-  
+
 export default {
     setTopLevelNavigator,
     navigate,
