@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { SectionList } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { statusBarMargin } from '../../services/deviceMargin'
 
 import OpacityIn from '../animate/OpacityIn'
 import SearchResult from './components/SearchResult'
 import SearchTitle from './components/SearchTitle'
+import EmptyLibrary from './components/EmptyLibrary'
 
 import { SECTIONS } from './SearchOptions'
 
@@ -62,6 +62,8 @@ class SearchView extends Component {
                     keyExtractor={(item, index) => item + index}
                     contentContainerStyle={{alignItems: 'center', paddingBottom: 20}}
                     pointerEvents={"box-none"}
+
+                    ListEmptyComponent={EmptyLibrary}
                 />
             </OpacityIn>
         )    
@@ -74,7 +76,7 @@ const styles = {
         top: 0, bottom: 0,
         left: 0, right: 0,
         marginTop: 65,
-        backgroundColor: '#000'
+        backgroundColor: 'rgba(0,0,0,0.8)'
     },
 }
 

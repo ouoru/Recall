@@ -23,16 +23,14 @@ class AndroidHandler extends Component {
         }
         if (showPreview) {
             this.props.hidePreview()
-            Explore.back()
-            return true
+            return false
         }
-        Explore.back()
-        return true
+        return false
     }
 
     render() {
         return (
-            <StatusBar translucent hidden={this.props.showPreview}/>
+            <StatusBar translucent backgroundColor={'rgba(0,0,0,0)'}/>
         )
     }
 }

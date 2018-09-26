@@ -26,15 +26,16 @@ function back(){
     )
 }
 
-function navigate(routeName){
+function navigate(routeName, params){
     if (!_container) {
         //TODO this is dirty i feel dirty
-        return setTimeout(() => navigate(routeName), 1000)
+        return setTimeout(() => navigate(routeName, params), 1000)
     }
     _container.dispatch(
         NavigationActions.navigate({
             type: 'Navigation/NAVIGATE',
-            routeName
+            routeName,
+            params
         }),
     );
 }

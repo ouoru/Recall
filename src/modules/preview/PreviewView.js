@@ -4,13 +4,13 @@ import {
     Dimensions,
     Text,
     TextInput,
-    ImageBackground,
+    Image,
     Keyboard,
     Animated,
-    StatusBar,
     TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
+import Video from 'react-native-video'
 
 import Action from '../components/Action'
 
@@ -18,8 +18,7 @@ import { hidePreview } from '../camera/CameraReducer'
 import { savePhoto } from '../library/LibraryReducer'
 
 const { height, width } = Dimensions.get('window')
-const LEFT_MARGIN = 30
-const BASE_Y = StatusBar.currentHeight + 25
+const PHOTO_MARGIN = 15
 
 class PhotoView extends Component {
     constructor(props) {
@@ -28,20 +27,17 @@ class PhotoView extends Component {
             keywords: null,
             error: null,
 
-            keyboardY: new Animated.Value(BASE_Y),
+            keyboardY: new Animated.Value(PHOTO_MARGIN),
             keyboardDidShow: false,
-            keyboardHeight: null,
         }
     }
 
     componentDidMount () {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
-        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide.bind(this));
     }
 
     componentWillUnmount () {
         this.keyboardDidShowListener.remove();
-        this.keyboardDidHideListener.remove();
     }
     
     //keyboardDidShow is un-ideal because it occurs after keyboard is shown.
@@ -50,41 +46,19 @@ class PhotoView extends Component {
         if (this.state.keyboardDidShow) return
         Animated.timing(
             this.state.keyboardY, {
-                toValue: -e.endCoordinates.height - BASE_Y,
+                toValue: -e.endCoordinates.height - PHOTO_MARGIN,
                 duration: 250,
                 useNativeDriver: true
             }
         ).start(
             () => this.setState({ 
                 keyboardDidShow: true,
-                keyboardHeight: e.endCoordinates.height,
             })
         )
     }
 
-    _onFocus = () => {
-        if (!this.state.keyboardDidShow) return
-        Animated.timing(
-            this.state.keyboardY, {
-                toValue: -this.state.keyboardHeight - BASE_Y,
-                duration: 250,
-                useNativeDriver: true
-            }
-        ).start()
-    }
-
     _onBackgroundPress = () => {
         Keyboard.dismiss()
-    }
-
-    _keyboardDidHide () {
-        Animated.timing(
-            this.state.keyboardY, {
-                toValue: -BASE_Y,
-                duration: 250,
-                useNativeDriver: true
-            }
-        ).start()
     }
 
     _goBack = () => {
@@ -114,19 +88,28 @@ class PhotoView extends Component {
     }
 
     render() {
-        const { photoData } = this.props
-
+        const { photoData, videoData } = this.props
+        const previewType = this.props.navigation.getParam('previewType', 'type/photo');
+        
         return (
-            <ImageBackground
-                source={{ uri: photoData.uri }}
-                style={styles.container}
-            >
+            <View style={styles.container}>
+                {previewType === 'type/photo' ?
+                    <Image
+                        source={{ uri: photoData.uri }}
+                        style={styles.container}
+                    />
+                    :<Video
+                        source={{ uri: videoData.uri }}
+                        style={styles.container}
+                        repeat={true}
+                    />
+                }
                 <TouchableOpacity
                     activeOpacity={1}
                     style={styles.darken}
                     onPress={this._onBackgroundPress}
                 >
-                    <Action name="x" color="#fff" size={22} style={{position: 'absolute', left: 30, top: 30}}
+                    <Action name="x" color="#fff" size={22} style={{position: 'absolute', left: 15, top: 30}}
                         onPress={this._goBack}/>
                     <Animated.View
                         style={{
@@ -136,10 +119,11 @@ class PhotoView extends Component {
                         }}
                     >
                         <Text style={styles.titleText}>
-                            {'Tag\nyour Photo.'}
+                            {`Tag\nyour ${previewType === 'type/photo' ? 'Photo' : 'Video'}.`}
                         </Text>
                         <View style={styles.inputStyle}>
                             <TextInput
+                                ref={'textInput'}
                                 value={this.state.keywords}
                                 onChangeText={this._onChangeText}
                                 onFocus={this._onFocus}
@@ -161,7 +145,7 @@ class PhotoView extends Component {
                         </View>
                     </Animated.View>
                 </TouchableOpacity>
-            </ImageBackground>
+            </View>
         )
     }
 }
@@ -181,20 +165,21 @@ const styles = {
         fontFamily: 'Roboto-Bold',
         fontSize: 28,
         color: '#fff',
-        paddingLeft: LEFT_MARGIN,
+        paddingLeft: PHOTO_MARGIN,
     },
     inputStyle: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: LEFT_MARGIN,
-        marginRight: LEFT_MARGIN,
+        marginLeft: PHOTO_MARGIN,
+        marginRight: PHOTO_MARGIN,
     }
 }
 
 export default connect(
     state => ({
         photoData: state.camera.photoData,
+        videoData: state.camera.videoData,
     }),
     { hidePreview, savePhoto }
 )(PhotoView)

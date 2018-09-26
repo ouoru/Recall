@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TextInput, Animated } from 'react-native'
 import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
 
 import Action from '../components/Action'
 import LottiePress from '../components/LottiePress'
@@ -129,7 +130,7 @@ const styles = {
         left: 0, right: 0,
         height: SEARCH_BAR_HEIGHT,
         paddingTop: statusBarMargin()/2,
-        paddingLeft: 15,
+        paddingLeft: 6,
         paddingRight: 15,
         flexDirection: 'row',
         alignItems: 'center',

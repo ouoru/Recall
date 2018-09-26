@@ -20,7 +20,7 @@ class Aperture extends Component {
                 style={styles.container}
             >
                 <Action name="circle" color="#fff" size={80}
-                    onPress={onPress} onLongPress={onLongPress} delayLongPress={200} onPressOut={onPressOut}/>
+                    onPress={onPress} onLongPress={onLongPress} delayLongPress={100} onPressOut={onPressOut}/>
             </LinearGradient>
         )
     }

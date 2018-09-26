@@ -30,7 +30,7 @@ class CameraView extends Component {
             const data = await this.cameraRef.current.takePictureAsync(options)
             //this.cameraRef.current.pausePreview()
             this.props.passPhotoData(data)
-            Explore.navigate('Photo')
+            Explore.navigate('Preview', { previewType: 'type/photo' })
         }
     }
 
@@ -43,7 +43,7 @@ class CameraView extends Component {
             };
             const data = await this.cameraRef.current.recordAsync(options)
             this.props.passVideoData(data)
-            Explore.navigate('Video')
+            Explore.navigate('Preview', { previewType: 'type/video' })
         }
     }
 
