@@ -1,7 +1,10 @@
+import { Dimensions } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 
 import CameraView from '../camera/CameraView'
 import PreviewView from '../preview/PreviewView'
+
+const { height } = Dimensions.get('window')
 
 const opacity = (index, position) => {
     const inputRange = [index - 1, index, index + 1];
@@ -15,6 +18,20 @@ const opacity = (index, position) => {
     };
 };
 
+const slideUp = (index, position) => {
+    const inputRange = [index - 1, index, index + 1];
+    const transform = [{
+        translateY: position.interpolate({
+            inputRange,
+            outputRange: [height, 0, 0],
+        })
+    }]
+
+    return {
+        transform
+    };
+}
+
 const config = () => {
     return {
         // Define scene interpolation, eq. custom transition
@@ -22,12 +39,12 @@ const config = () => {
             const {position, scene} = sceneProps;
             const {index} = scene;
 
-            return opacity(index, position);
+            return slideUp(index, position);
         }
     }
 };
 
-const HomeNav = createStackNavigator(
+const AppNavigator = createStackNavigator(
     {
         Camera: { screen: CameraView },
         Preview: { screen: PreviewView },
@@ -41,4 +58,4 @@ const HomeNav = createStackNavigator(
     }
 )
 
-export default HomeNav
+export default AppNavigator
