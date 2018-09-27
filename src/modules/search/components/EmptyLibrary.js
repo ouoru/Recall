@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { View, Image, Text } from 'react-native'
-import Picture from '../../../assets/images/pictures.png'
+import pictureSource from '../../../assets/images/folder.png'
 
 class EmptyLibrary extends Component {
     render() {
         return (
             <View style={{ alignItems: 'center' }}>
                 <Image
-                    source={Picture}
+                    source={pictureSource}
                     style={{ height: 60, width: 60 }}
                 />
                 <Text
@@ -18,7 +18,7 @@ class EmptyLibrary extends Component {
                         textAlign: 'center',
                     }}
                 >
-                    {`You don't have\nany photos.`}
+                    {`You don't have\nany files.`}
                 </Text>
             </View>
         )

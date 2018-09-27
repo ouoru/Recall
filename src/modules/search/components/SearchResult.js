@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, Image, Dimensions, TouchableOpacity } from 'react-native'
-import Icon from 'react-native-vector-icons/Feather'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { stampToDate } from '../../../services/parseDate';
 
 const { height, width } = Dimensions.get('window')
@@ -27,7 +27,7 @@ const SearchResult = ({item}) => {
                 <Text style={styles.dateStyle}>{item.timestamp && stampToDate(item.timestamp)}</Text>
             </View>
             <Icon
-                name={'more-vertical'}
+                name={'md-more'}
                 size={22}
                 color={'#646464'}
                 style={styles.iconStyle}
