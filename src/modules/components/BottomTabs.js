@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
-import { View, Text, Dimensions } from 'react-native'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import { View, Text, TouchableOpacity, Dimensions } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 import Shadow from './Shadow'
 
-import Action from './Action'
 import Explore from '../navigation/Explore'
 
 const ICON_SIZE = 25
 const ICON_COLOR = '#757575'
-const { height, width } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 
 const TABS = [
     { name: 'md-home', routeName: 'Search', title: 'Home' },
     { name: 'md-create', routeName: 'Memo', title: 'Memo' },
-    { name: 'ios-camera', routeName: 'Camera', size: 30, color: '#fff', extraStyle: {height: 44, borderRadius: 22, backgroundColor: ICON_COLOR}},
+    { name: 'ios-camera', routeName: 'Camera', size: 33, color: '#fff', extraStyle: true },
     { name: 'ios-paper-plane', routeName: 'Paper', title: 'Paper' },
     { name: 'md-person', routeName: 'Profile', title: 'Profile' },
 ]
@@ -25,16 +24,19 @@ class BottomTabs extends Component {
 
     _renderItem = (item) => {
         return (
-            <View key={item.routeName} style={[styles.tabContainer, item.extraStyle]}>
-                <Action
+            <TouchableOpacity
+                key={item.routeName}
+                style={[styles.tabContainer, item.extraStyle && styles.extraStyle]}
+                activeOpacity={0.5}
+                onPress={this._onPress.bind(this, item.routeName)}
+            >
+                <Icon
                     name={item.name}
                     size={item.size || ICON_SIZE}
                     color={item.color || ICON_COLOR}
-                    VectorType={Ionicons}
-                    onPress={this._onPress.bind(this, item.routeName)}
                 />
                 {item.title && <Text style={styles.textStyle}>{item.title}</Text>}
-            </View>
+            </TouchableOpacity>
         )
     }
 
@@ -72,6 +74,11 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
     },
+    extraStyle: {
+        height: 44,
+        borderRadius: 22,
+        backgroundColor: ICON_COLOR
+    }
 }
 
 export default BottomTabs

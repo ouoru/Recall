@@ -4,14 +4,10 @@ import { connect } from 'react-redux'
 
 import Action from '../components/Action'
 import Shadow from '../components/Shadow'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 
-import { updateSearchText, onSearchBarFocused, hideSearchView } from './SearchReducer'
-import { toggleCamera, toggleFlash } from '../camera/CameraReducer'
+import { updateSearchText, onSearchBarFocused } from './SearchReducer'
 import { statusBarMargin } from '../../services/deviceMargin'
 
-const ANIM_START = 0.13
-const ANIM_END = 0.4
 const SEARCH_BAR_HEIGHT = 55
 const SHADOW_HEIGHT = 6
 
@@ -20,34 +16,6 @@ class SearchBar extends Component {
         super(props)
         this.state = {
             searchText: null,
-            animProgress: new Animated.Value(ANIM_START),
-            searchBar: new Animated.Value(1)
-        }
-    }
-
-    componentWillReceiveProps(newProps) {
-        if (newProps.showSearchView !== this.props.showSearchView) {
-            Animated.timing(
-                this.state.animProgress, {
-                    toValue: newProps.showSearchView ? ANIM_END : ANIM_START,
-                    duration: 400,
-                    useNativeDriver: true
-                }
-            ).start()
-            if (!newProps.showSearchView) {
-                this._onChangeText()
-                this.refs.textInput.blur()
-            }
-        }
-
-        if(newProps.showPreview !== this.props.showPreview) {
-            Animated.timing(
-                this.state.searchBar, {
-                    toValue: newProps.showPreview ? 0 : 1,
-                    duration: 250,
-                    useNativeDriver: true
-                }
-            ).start()
         }
     }
 
@@ -58,36 +26,13 @@ class SearchBar extends Component {
         this.props.updateSearchText(text)
     }
 
-    _onOptionPress = () => {
-        if (this.props.showSearchView) {
-            return this.props.hideSearchView()
-        }
-        //TODO menu logic
-    }
-
     _focusSearchBar = () => {
         this.refs.textInput.focus()
     }
 
     render() {
-        const { camera, flash,
-            toggleCamera, toggleFlash,
-        } = this.props
-        
         return (
-            <Animated.View
-                style={[
-                    styles.container,
-                    {
-                        transform: [
-                            { translateY: this.state.searchBar.interpolate({
-                                inputRange: [0, 1],
-                                outputRange: [-SEARCH_BAR_HEIGHT, 0]
-                            })}
-                        ]
-                    }
-                ]}
-            >   
+            <View style={styles.container}>   
                 <View style={styles.searchBar}>
                     <Action name="search" color="rgba(0,0,0,0.5)" size={22} style={{marginRight: 5}}
                         onPress={this._focusSearchBar}/>
@@ -109,13 +54,9 @@ class SearchBar extends Component {
                         autoCorrect={false}
                         underlineColorAndroid={'transparent'}
                     />
-                    <Action name="ios-flash" color={flash?"#FFDC64":"#e6e6e6"} size={25} style={{marginRight: 20}}
-                        onPress={toggleFlash} VectorType={Ionicons}/>
-                    <Action name="ios-reverse-camera" color="#fff" size={28}
-                        onPress={toggleCamera} VectorType={Ionicons}/>
                 </View>
                 <Shadow side="bottom" height={SHADOW_HEIGHT}/>
-            </Animated.View>
+            </View>
         )
     }
 }
@@ -136,11 +77,6 @@ const styles = {
 }
 
 export default connect(
-    state => ({
-        camera: state.camera.camera,
-        flash: state.camera.flash,
-        showSearchView: state.search.showSearchView,
-        showPreview: state.camera.showPreview,
-    }),
-    { updateSearchText, onSearchBarFocused, hideSearchView, toggleCamera, toggleFlash }
+    null,
+    { updateSearchText, onSearchBarFocused }
 )(SearchBar)

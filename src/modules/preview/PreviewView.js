@@ -61,11 +61,6 @@ class PhotoView extends Component {
         Keyboard.dismiss()
     }
 
-    _goBack = () => {
-        this.props.navigation.goBack()
-        this.props.hidePreview()
-    }
-
     _onChangeText = text => {
         this.setState({
             keywords: text
@@ -109,8 +104,6 @@ class PhotoView extends Component {
                     style={styles.darken}
                     onPress={this._onBackgroundPress}
                 >
-                    <Action name="x" color="#fff" size={22} style={{position: 'absolute', left: 15, top: 30}}
-                        onPress={this._goBack}/>
                     <Animated.View
                         style={{
                             position: 'absolute',

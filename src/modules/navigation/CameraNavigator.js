@@ -1,8 +1,11 @@
+import React from 'react'
+
 import { Dimensions } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 
 import CameraView from '../camera/CameraView'
 import PreviewView from '../preview/PreviewView'
+import CameraHeader from '../camera/components/CameraHeader'
 
 const { height } = Dimensions.get('window')
 
@@ -46,11 +49,13 @@ const config = () => {
 
 const AppNavigator = createStackNavigator(
     {
-        Camera: { screen: CameraView },
+        Camera: { screen: CameraView, },
         Preview: { screen: PreviewView },
     },
     {
-        headerMode: 'none',
+        navigationOptions: {
+            header: props => <CameraHeader/>
+        },
         transitionConfig: config,
         cardStyle: {
             backgroundColor: 'transparent'

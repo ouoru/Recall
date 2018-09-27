@@ -68,7 +68,6 @@ class SearchView extends Component {
 const styles = {
     container: {
         flex: 1,
-        justifyContent: 'center',
         paddingBottom: 20,
         backgroundColor: '#fff',
     },
