@@ -53,7 +53,6 @@ class SearchBar extends Component {
                         underlineColorAndroid={'transparent'}
                     />
                 </View>
-                <Shadow side="bottom" height={SHADOW_HEIGHT}/>
             </View>
         )
     }
@@ -61,8 +60,10 @@ class SearchBar extends Component {
 
 const styles = {
     container: {
-        height: SEARCH_BAR_HEIGHT + statusBarMargin() + SHADOW_HEIGHT,
+        height: SEARCH_BAR_HEIGHT + statusBarMargin(),
         backgroundColor: '#fff',
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(0,0,0,0.1)',
     },
     searchBar: {
         flexDirection: 'row',

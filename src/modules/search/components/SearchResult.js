@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Text, View, Image, Dimensions, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { stampToDate } from '../../../services/parseDate';
+import { types } from '../../library/LibraryTypes'
 
 const { height, width } = Dimensions.get('window')
 const PHOTO_SIZE = width / 5
 
 const SearchResult = ({item}) => {
-    const isVideo = item.type === 'type/video'
+    const isVideo = item.type === types.video
 
     return (
         <TouchableOpacity
@@ -15,20 +16,25 @@ const SearchResult = ({item}) => {
             style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginBottom: 2,
+                paddingLeft: 15,
+                paddingRight: 25,
+                paddingBottom: 5,
             }}
         >
-            <View style={{ marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
+            <View>
                 <Image
                     source={{ uri: item.uri }}
                     style={styles.photoDim}
                 />
-                {isVideo && <Icon
-                    name="ios-play"
-                    size={30}
-                    color="#fff"
-                    style={{position: 'absolute'}}
-                />}
+                {isVideo && 
+                    <View style={styles.videoContainer}>
+                        <Icon
+                            name="ios-play"
+                            size={30}
+                            color="#fff"
+                        />
+                    </View>
+                }
             </View>
             <View style={styles.textContainer}>
                 <Text style={styles.keywordsStyle}>{item.keywords}</Text>
@@ -38,7 +44,6 @@ const SearchResult = ({item}) => {
                 name={'md-more'}
                 size={22}
                 color={'#646464'}
-                style={styles.iconStyle}
             />
         </TouchableOpacity>
     )
@@ -57,10 +62,18 @@ const styles = {
         width: PHOTO_SIZE,
         height: PHOTO_SIZE,
         borderRadius: 3,
-
+    },
+    videoContainer: {
+        position: 'absolute',
+        height: PHOTO_SIZE,
+        width: PHOTO_SIZE,
+        backgroundColor: 'rgba(0,0,0,0.4)',
+        justifyContent: 'center',
+        alignItems: 'center' ,
+        borderRadius: 3,
     },
     textContainer: {
-        width: width / 2,
+        flex: 1,
         paddingLeft: 10,
     },
     keywordsStyle: {
@@ -76,10 +89,6 @@ const styles = {
         lineHeight: 15,
         color: '#646464',
     },
-    iconStyle: {
-        marginLeft: 'auto',
-        marginRight: 15,
-    }
 }
 
 export default SearchResult

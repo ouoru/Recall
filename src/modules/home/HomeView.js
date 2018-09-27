@@ -46,7 +46,7 @@ class HomeView extends Component {
 
 const styles = {
     container: {
-        paddingBottom: 20,
+        paddingBottom: 10,
         backgroundColor: '#fff',
     },
 }

@@ -1,15 +1,18 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, Text, Dimensions } from 'react-native'
+import Shadow from '../../components/Shadow'
 
 const { width } = Dimensions.get('window')
 const HEADER_HEIGHT = 34
+const SHADOW_HEIGHT = 5
 
 const SearchTitle = ({section: {title}}) => {
     return (
-        <View style={styles.container}>
-            <View style={styles.line}/>
-            <Text style={styles.text}>{title}</Text>
-            <View style={styles.line}/>
+        <View>
+            <View style={styles.container}>
+                <Text style={styles.text}>{title}</Text>
+            </View>
+            <Shadow side="bottom" height={SHADOW_HEIGHT}/>
         </View>
     )
 }
@@ -17,9 +20,10 @@ const SearchTitle = ({section: {title}}) => {
 const styles = {
     container: {
         width,
-        height: HEADER_HEIGHT,
+        height: HEADER_HEIGHT + SHADOW_HEIGHT,
         flexDirection: 'row',
         alignItems: 'center',
+        backgroundColor: '#fff',
     },
     line: {
         flex: 1,
@@ -28,14 +32,12 @@ const styles = {
     },
     text: {
         fontFamily: 'Roboto-Medium',
-        fontSize: 12,
-        lineHeight: 14,
+        fontSize: 14,
+        lineHeight: 16,
         color: '#787878',
-        marginLeft: 5,
-        marginRight: 5,
+        marginLeft: 20,
         marginTop: 10,
         marginBottom: 10,
-        letterSpacing: 0.5,
     },
 }
 

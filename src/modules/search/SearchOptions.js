@@ -18,7 +18,7 @@ export const SECTIONS = [
 export const SearchViewConfig = [
     {
         key: 'PAST WEEK',
-        title: 'PAST WEEK',
+        title: 'Past Week',
         filterUsing: filterPastWeek,
     },
 ]

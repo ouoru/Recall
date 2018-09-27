@@ -13,7 +13,7 @@ const { width } = Dimensions.get('window')
 const TABS = [
     { index: 0, name: 'md-home', routeName: 'Home', title: 'Home' },
     { index: 1, name: 'md-create', routeName: 'Memo', title: 'Memo' },
-    { name: 'ios-camera', routeName: 'Camera', size: 33, color: '#fff', extraStyle: true },
+    { name: 'ios-camera', routeName: 'Camera', size: 40, extraStyle: true },
     { index: 2, name: 'ios-paper-plane', routeName: 'Paper', title: 'Paper' },
     { index: 3, name: 'md-person', routeName: 'Profile', title: 'Profile' },
 ]
@@ -92,9 +92,9 @@ const styles = {
         alignItems: 'center',
     },
     extraStyle: {
-        height: 44,
-        borderRadius: 22,
-        backgroundColor: ICON_COLOR
+        height: width/5,
+        backgroundColor: '#f0f0f0',
+        paddingBottom: 5,
     }
 }
 
