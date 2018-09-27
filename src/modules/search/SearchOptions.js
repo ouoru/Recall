@@ -13,9 +13,12 @@ export const SECTIONS = [
         title: 'MY VIDEOS',
         filterUsing: fuseService.searchVideos,
     },
+]
+
+export const VIEW_SECTIONS = [
     {
         key: 'PAST WEEK',
         title: 'PAST WEEK',
         filterUsing: filterPastWeek,
-    }
+    },
 ]

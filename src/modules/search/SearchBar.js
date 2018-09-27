@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
-import { TextInput, Animated } from 'react-native'
+import { View, TextInput, Animated } from 'react-native'
 import { connect } from 'react-redux'
-import LinearGradient from 'react-native-linear-gradient'
 
 import Action from '../components/Action'
-import LottiePress from '../components/LottiePress'
+import Shadow from '../components/Shadow'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import { updateSearchText, onSearchBarFocused, hideSearchView } from './SearchReducer'
 import { toggleCamera, toggleFlash } from '../camera/CameraReducer'
 import { statusBarMargin } from '../../services/deviceMargin'
-import menuAndClose from '../../assets/animations/menuAndClose.json'
 
 const ANIM_START = 0.13
 const ANIM_END = 0.4
-const SEARCH_BAR_HEIGHT = 75
+const SEARCH_BAR_HEIGHT = 55
+const SHADOW_HEIGHT = 6
 
 class SearchBar extends Component {
     constructor(props) {
@@ -88,36 +87,34 @@ class SearchBar extends Component {
                         ]
                     }
                 ]}
-            >
-                <LottiePress source={menuAndClose} progress={this.state.animProgress}
-                    style={{height: 30, width: 30, marginRight: 10}}
-                    animStyle={{height: 180, width: 180}}
-                    onPress={this._onOptionPress}
-                />
-                <Action name="search" color="#fff" size={22}
-                    onPress={this._focusSearchBar}/>
-                <TextInput
-                    ref={'textInput'}
-                    value={this.state.searchText}
-                    onFocus={this.props.onSearchBarFocused}
-                    onChangeText={this._onChangeText}
-                    style={{
-                        flex: 1,
-                        color: '#fff',
-                        fontFamily: 'Roboto-Regular',
-                        fontSize: 16,
-                        marginRight: 5,
-                        marginLeft: 5,
-                    }}
-                    placeholder={'Search'}
-                    placeholderTextColor={'rgba(255,255,255,0.6)'}
-                    autoCorrect={false}
-                    underlineColorAndroid={'transparent'}
-                />
-                <Action name="ios-flash" color={flash?"#FFDC64":"#e6e6e6"} size={25} style={{marginRight: 20}}
-                    onPress={toggleFlash} VectorType={Ionicons}/>
-                <Action name="ios-reverse-camera" color="#fff" size={28}
-                    onPress={toggleCamera} VectorType={Ionicons}/>
+            >   
+                <View style={styles.searchBar}>
+                    <Action name="search" color="rgba(0,0,0,0.5)" size={22} style={{marginRight: 5}}
+                        onPress={this._focusSearchBar}/>
+                    <TextInput
+                        ref={'textInput'}
+                        value={this.state.searchText}
+                        onFocus={this.props.onSearchBarFocused}
+                        onChangeText={this._onChangeText}
+                        style={{
+                            flex: 1,
+                            color: '#000',
+                            fontFamily: 'Roboto-Regular',
+                            fontSize: 16,
+                            marginRight: 5,
+                            marginLeft: 5,
+                        }}
+                        placeholder={'Search'}
+                        placeholderTextColor={'rgba(0,0,0,0.4)'}
+                        autoCorrect={false}
+                        underlineColorAndroid={'transparent'}
+                    />
+                    <Action name="ios-flash" color={flash?"#FFDC64":"#e6e6e6"} size={25} style={{marginRight: 20}}
+                        onPress={toggleFlash} VectorType={Ionicons}/>
+                    <Action name="ios-reverse-camera" color="#fff" size={28}
+                        onPress={toggleCamera} VectorType={Ionicons}/>
+                </View>
+                <Shadow side="bottom" height={SHADOW_HEIGHT}/>
             </Animated.View>
         )
     }
@@ -125,20 +122,16 @@ class SearchBar extends Component {
 
 const styles = {
     container: {
-        position: 'absolute',
-        top: 0,
-        left: 0, right: 0,
-        height: SEARCH_BAR_HEIGHT,
-        paddingTop: statusBarMargin()/2,
-        paddingLeft: 6,
-        paddingRight: 15,
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#000',
+        height: SEARCH_BAR_HEIGHT + statusBarMargin() + SHADOW_HEIGHT,
+        backgroundColor: '#fff',
     },
-    bottomBorder: {
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(255,255,255,0.4)',
+    searchBar: {
+        flexDirection: 'row',
+        marginTop: statusBarMargin(),
+        height: SEARCH_BAR_HEIGHT,
+        alignItems: 'center',
+        paddingLeft: 15,
+        paddingRight: 15,
     }
 }
 

@@ -67,7 +67,6 @@ class CameraView extends Component {
                     permissionDialogMessage={'We need your permission to use your camera phone'}
                 />
                 <Aperture onPress={this._takePicture} onLongPress={this._startVideo} onPressOut={this._onPressOut}/>
-                <SearchView/>
             </View>
         )
     }

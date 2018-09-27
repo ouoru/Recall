@@ -1,33 +1,22 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
+import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation'
 
 import SearchView from '../search/SearchView'
+import MemoView from '../memo/MemoView'
+import PaperView from '../memo/PaperView'
+import ProfileView from '../memo/ProfileView'
 import BottomTabs from '../components/BottomTabs'
-import SearchBar from '../search/SearchBar'
 
 const HomeTabNavigator = createBottomTabNavigator(
     {
-        Search: { screen: SearchView },
-        Search2: { screen: SearchView },
-        Search3: { screen: SearchView },
-        Search4: { screen: SearchView },
-        Search5: { screen: SearchView },
+        Search: SearchView,
+        Memo: { screen: MemoView },
+        Paper: { screen: PaperView },
+        Profile: { screen: ProfileView },
     },
     {
         tabBarComponent: props => <BottomTabs {...props}/>
     }
 )
 
-class HomeNavigator extends Component {
-    render() {
-        return (
-            <View style={{ flex: 1 }}>
-                <SearchBar/>
-                <HomeTabNavigator/>
-            </View>
-        )
-    }
-}
-
-export default HomeNavigator
+export default HomeTabNavigator

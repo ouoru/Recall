@@ -24,13 +24,13 @@ const styles = {
     line: {
         flex: 1,
         height: 1,
-        backgroundColor: 'rgba(255,255,255,0.2)',
+        backgroundColor: '#dcdcdc',
     },
     text: {
         fontFamily: 'Roboto-Medium',
         fontSize: 12,
         lineHeight: 14,
-        color: '#fff',
+        color: '#787878',
         marginLeft: 5,
         marginRight: 5,
         marginTop: 10,

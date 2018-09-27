@@ -1,8 +1,10 @@
+import React from 'react'
 import { Dimensions } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 
 import HomeTabNavigator from './HomeTabNavigator';
 import CameraNavigator from './CameraNavigator'
+import SearchBar from '../search/SearchBar';
 
 const { height } = Dimensions.get('window')
 
@@ -50,11 +52,20 @@ const config = () => {
 
 const AppNavigator = createStackNavigator(
     {
-        HomeTabNav: { screen: HomeTabNavigator },
-        CameraNav: { screen: CameraNavigator },
+        HomeTabNav: {
+            screen: HomeTabNavigator,
+            navigationOptions: {
+                header: () => <SearchBar/>
+            }
+        },
+        CameraNav: {
+            screen: CameraNavigator,
+            navigationOptions: {
+                header: null
+            }
+        },
     },
     {
-        headerMode: 'none',
         transitionConfig: config,
         cardStyle: {
             backgroundColor: 'transparent'

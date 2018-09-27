@@ -16,7 +16,7 @@ const SearchResult = ({item}) => {
                 marginBottom: 2,
             }}
         >
-            <View>
+            <View style={{ marginLeft: 15 }}>
                 <Image
                     source={{ uri: item.uri }}
                     style={styles.photoDim}
@@ -29,7 +29,8 @@ const SearchResult = ({item}) => {
             <Icon
                 name={'more-vertical'}
                 size={22}
-                color={'#fff'}
+                color={'#646464'}
+                style={styles.iconStyle}
             />
         </TouchableOpacity>
     )
@@ -48,7 +49,7 @@ const styles = {
         width: PHOTO_SIZE,
         height: PHOTO_SIZE,
         borderRadius: 3,
-        margin: 2,
+
     },
     textContainer: {
         width: width / 2,
@@ -58,14 +59,18 @@ const styles = {
         fontFamily: 'Roboto-Medium',
         fontSize: 14,
         lineHeight: 17,
-        color: '#fff',
+        color: '#000',
         letterSpacing: 0.4,
     },
     dateStyle: {
         fontFamily: 'Roboto-Regular',
         fontSize: 12,
         lineHeight: 15,
-        color: '#e6e6e6',
+        color: '#646464',
+    },
+    iconStyle: {
+        marginLeft: 'auto',
+        marginRight: 15,
     }
 }
 

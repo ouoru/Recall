@@ -5,7 +5,7 @@ import Picture from '../../../assets/images/pictures.png'
 class EmptyLibrary extends Component {
     render() {
         return (
-            <View style={{ height: 270, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ alignItems: 'center' }}>
                 <Image
                     source={Picture}
                     style={{ height: 60, width: 60 }}
@@ -14,7 +14,7 @@ class EmptyLibrary extends Component {
                     style={{
                         fontFamily: 'Roboto-Medium',
                         fontSize: 13,
-                        color: '#fff',
+                        color: '#c8c8c8',
                         textAlign: 'center',
                     }}
                 >

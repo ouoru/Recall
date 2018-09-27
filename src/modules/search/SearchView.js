@@ -50,33 +50,27 @@ class SearchView extends Component {
 
     render() {
         return (
-            <OpacityIn
-                visible={this.props.showSearchView}
-                style={styles.container}
-            >
-                <SectionList
-                    renderItem={SearchResult}
-                    renderSectionHeader={SearchTitle}
-                    stickySectionHeadersEnabled={true}
-                    sections={this.state.sectionData}
-                    keyExtractor={(item, index) => item + index}
-                    contentContainerStyle={{alignItems: 'center', paddingBottom: 20}}
-                    pointerEvents={"box-none"}
+            <SectionList
+                renderItem={SearchResult}
+                renderSectionHeader={SearchTitle}
+                stickySectionHeadersEnabled={true}
+                sections={this.state.sectionData}
+                keyExtractor={(item, index) => item + index}
+                contentContainerStyle={styles.container}
+                pointerEvents={"box-none"}
 
-                    ListEmptyComponent={EmptyLibrary}
-                />
-            </OpacityIn>
+                ListEmptyComponent={EmptyLibrary}
+            />
         )    
     }
 }
 
 const styles = {
     container: {
-        position: 'absolute',
-        top: 0, bottom: 0,
-        left: 0, right: 0,
-        marginTop: 65,
-        backgroundColor: 'rgba(0,0,0,0.8)'
+        flex: 1,
+        justifyContent: 'center',
+        paddingBottom: 20,
+        backgroundColor: '#fff',
     },
 }
 
