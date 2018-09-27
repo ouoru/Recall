@@ -23,5 +23,6 @@ export function stampToDateObj(stamp) {
 export function filterPastWeek(library, text) {
     var week = 7 * 24 * 60 * 60 * 1000
     var weekAgo = Date.now() - week
-    return _.sortBy(_.filter(library.photos, a => a.timestamp > weekAgo), b => -b.timestamp)
+    var data = [...library.photos, ...library.videos]
+    return _.sortBy(_.filter(data, a => a.timestamp > weekAgo), b => -b.timestamp)
 }

@@ -11,7 +11,7 @@ const ICON_SELECTED = '#000'
 const { width } = Dimensions.get('window')
 
 const TABS = [
-    { index: 0, name: 'md-home', routeName: 'Search', title: 'Home' },
+    { index: 0, name: 'md-home', routeName: 'Home', title: 'Home' },
     { index: 1, name: 'md-create', routeName: 'Memo', title: 'Memo' },
     { name: 'ios-camera', routeName: 'Camera', size: 33, color: '#fff', extraStyle: true },
     { index: 2, name: 'ios-paper-plane', routeName: 'Paper', title: 'Paper' },

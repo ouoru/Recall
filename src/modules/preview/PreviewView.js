@@ -15,7 +15,7 @@ import Video from 'react-native-video'
 import Action from '../components/Action'
 
 import { hidePreview } from '../camera/CameraReducer'
-import { savePhoto } from '../library/LibraryReducer'
+import { savePhoto, saveVideo } from '../library/LibraryReducer'
 
 const { height, width } = Dimensions.get('window')
 const PHOTO_MARGIN = 15
@@ -67,9 +67,13 @@ class PhotoView extends Component {
         })
     }
 
-    _verifyText = () => {
+    _verifyText = (previewType) => {
         if(!this.state.keywords) return
-        this._savePhoto()
+        if (previewType === 'type/photo') {
+            this._savePhoto()
+        } else if (previewType === 'type/video') {
+            this._saveVideo()
+        }
     }
 
     _savePhoto = () => {
@@ -78,6 +82,16 @@ class PhotoView extends Component {
             this.props.photoData.uri,
             this.state.keywords,
             this.props.photoData.timestamp
+        )
+        this.props.hidePreview()
+    }
+
+    _saveVideo = () => {
+        this.props.navigation.goBack()
+        this.props.saveVideo(
+            this.props.videoData.uri,
+            this.state.keywords,
+            this.props.videoData.timestamp
         )
         this.props.hidePreview()
     }
@@ -134,7 +148,7 @@ class PhotoView extends Component {
                                 underlineColorAndroid={'#fff'}
                             />
                             <Action name="check" color='#fff' size={25} style={{position: 'absolute', right: 5}}
-                                onPress={this._verifyText}/>
+                                onPress={this._verifyText.bind(this, previewType)}/>
                         </View>
                     </Animated.View>
                 </TouchableOpacity>
@@ -174,5 +188,5 @@ export default connect(
         photoData: state.camera.photoData,
         videoData: state.camera.videoData,
     }),
-    { hidePreview, savePhoto }
+    { hidePreview, savePhoto, saveVideo }
 )(PhotoView)

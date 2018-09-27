@@ -7,6 +7,8 @@ const { height, width } = Dimensions.get('window')
 const PHOTO_SIZE = width / 5
 
 const SearchResult = ({item}) => {
+    const isVideo = item.type === 'type/video'
+
     return (
         <TouchableOpacity
             key={item.timestamp}
@@ -16,11 +18,17 @@ const SearchResult = ({item}) => {
                 marginBottom: 2,
             }}
         >
-            <View style={{ marginLeft: 15 }}>
+            <View style={{ marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
                 <Image
                     source={{ uri: item.uri }}
                     style={styles.photoDim}
                 />
+                {isVideo && <Icon
+                    name="ios-play"
+                    size={30}
+                    color="#fff"
+                    style={{position: 'absolute'}}
+                />}
             </View>
             <View style={styles.textContainer}>
                 <Text style={styles.keywordsStyle}>{item.keywords}</Text>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation'
 
-import SearchView from '../search/SearchView'
+import HomeView from '../home/HomeView'
 import MemoView from '../memo/MemoView'
 import PaperView from '../memo/PaperView'
 import ProfileView from '../memo/ProfileView'
@@ -9,13 +9,13 @@ import BottomTabs from '../components/BottomTabs'
 
 const HomeTabNavigator = createBottomTabNavigator(
     {
-        Search: { screen: SearchView },
+        Home: { screen: HomeView },
         Memo: { screen: MemoView },
         Paper: { screen: PaperView },
         Profile: { screen: ProfileView },
     },
     {
-        initialRouteName: 'Search',
+        initialRouteName: 'Home',
         tabBarComponent: props => <BottomTabs {...props}/>
     }
 )

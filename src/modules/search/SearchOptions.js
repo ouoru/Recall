@@ -15,7 +15,7 @@ export const SECTIONS = [
     },
 ]
 
-export const VIEW_SECTIONS = [
+export const SearchViewConfig = [
     {
         key: 'PAST WEEK',
         title: 'PAST WEEK',

@@ -7,9 +7,9 @@ import SearchResult from './components/SearchResult'
 import SearchTitle from './components/SearchTitle'
 import EmptyLibrary from './components/EmptyLibrary'
 
-import { SECTIONS } from './SearchOptions'
+import { SearchViewConfig } from './SearchOptions'
 
-class SearchView extends Component {
+class SearchModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -30,16 +30,16 @@ class SearchView extends Component {
     _update(library, searchText) {
         var newData = []
 
-        for (var i=0; i<SECTIONS.length; i++) {
+        for (var i=0; i<SearchViewConfig.length; i++) {
             newData.push({  
-                title: SECTIONS[i].title,
-                data: SECTIONS[i].filterUsing(library, searchText),
-                renderItem: SECTIONS[i].renderItem || null,
+                title: SearchViewConfig[i].title,
+                data: SearchViewConfig[i].filterUsing(library, searchText),
+                renderItem: SearchViewConfig[i].renderItem || null,
             })
         }
 
         //TODO empty section logic
-        //currently just removes sections with data=[]
+        //currently just removes SearchViewConfig with data=[]
         _.remove(newData, a => !a.data.length)
 
         this.setState({
@@ -53,7 +53,7 @@ class SearchView extends Component {
                 renderItem={SearchResult}
                 renderSectionHeader={SearchTitle}
                 stickySectionHeadersEnabled={true}
-                sections={this.state.sectionData}
+                SearchViewConfig={this.state.sectionData}
                 keyExtractor={(item, index) => item + index}
                 contentContainerStyle={styles.container}
                 pointerEvents={"box-none"}
@@ -79,4 +79,4 @@ export default connect(
         library: state.library,
         showSearchView: state.search.showSearchView
     })
-)(SearchView)
+)(SearchModal)

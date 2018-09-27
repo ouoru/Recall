@@ -24,7 +24,7 @@ const styles = {
     line: {
         flex: 1,
         height: 1,
-        backgroundColor: '#dcdcdc',
+        backgroundColor: '#f0f0f0',
     },
     text: {
         fontFamily: 'Roboto-Medium',

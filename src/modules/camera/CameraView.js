@@ -3,7 +3,6 @@ import { View, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { RNCamera } from 'react-native-camera'
 
-import SearchView from '../search/SearchView';
 import Aperture from './components/Aperture'
 
 import { passPhotoData, passVideoData } from './CameraReducer'

@@ -1,13 +1,13 @@
+import { types } from './LibraryTypes'
+
 const initialState = {
     photos: [],
     videos: [],
-    
     showToast: null,
 }
 
 const SAVE_PHOTO = 'library/save-photo'
 const SAVE_VIDEO = 'library/save-video'
-
 const SHOW_TOAST = 'library/show-toast'
 
 export function savePhoto(uri, keywords, timestamp) {
@@ -18,6 +18,7 @@ export function savePhoto(uri, keywords, timestamp) {
                 uri,
                 keywords,
                 timestamp,
+                type: types.photo
             }
         })
     }
@@ -31,6 +32,7 @@ export function saveVideo(uri, keywords, timestamp) {
                 uri,
                 keywords,
                 timestamp,
+                type: types.video,
             }
         })
     }
