@@ -7,14 +7,15 @@ import Explore from '../navigation/Explore'
 
 const ICON_SIZE = 25
 const ICON_COLOR = '#757575'
+const ICON_SELECTED = '#000'
 const { width } = Dimensions.get('window')
 
 const TABS = [
-    { name: 'md-home', routeName: 'Search', title: 'Home' },
-    { name: 'md-create', routeName: 'Memo', title: 'Memo' },
+    { index: 0, name: 'md-home', routeName: 'Search', title: 'Home' },
+    { index: 1, name: 'md-create', routeName: 'Memo', title: 'Memo' },
     { name: 'ios-camera', routeName: 'Camera', size: 33, color: '#fff', extraStyle: true },
-    { name: 'ios-paper-plane', routeName: 'Paper', title: 'Paper' },
-    { name: 'md-person', routeName: 'Profile', title: 'Profile' },
+    { index: 2, name: 'ios-paper-plane', routeName: 'Paper', title: 'Paper' },
+    { index: 3, name: 'md-person', routeName: 'Profile', title: 'Profile' },
 ]
 
 class BottomTabs extends Component {
@@ -23,19 +24,30 @@ class BottomTabs extends Component {
     }
 
     _renderItem = (item) => {
+        const { state } = this.props.navigation
+        const { index } = state
+        const active = index === item.index
+
         return (
             <TouchableOpacity
                 key={item.routeName}
-                style={[styles.tabContainer, item.extraStyle && styles.extraStyle]}
+                style={[
+                    styles.tabContainer,
+                    item.extraStyle && styles.extraStyle,
+                ]}
                 activeOpacity={0.5}
                 onPress={this._onPress.bind(this, item.routeName)}
             >
                 <Icon
                     name={item.name}
                     size={item.size || ICON_SIZE}
-                    color={item.color || ICON_COLOR}
+                    color={(active && ICON_SELECTED) || item.color || ICON_COLOR}
                 />
-                {item.title && <Text style={styles.textStyle}>{item.title}</Text>}
+                {item.title &&
+                    <Text style={active ? styles.textActiveStyle : styles.textStyle}>
+                        {item.title}
+                    </Text>
+                }
             </TouchableOpacity>
         )
     }
@@ -68,6 +80,11 @@ const styles = {
         fontFamily: 'Roboto-Regular',
         fontSize: 12,
         color: ICON_COLOR,
+    },
+    textActiveStyle: {
+        fontFamily: 'Roboto-Regular',
+        fontSize: 12,
+        color: ICON_SELECTED,
     },
     bigIconView: {
         width: width/5,

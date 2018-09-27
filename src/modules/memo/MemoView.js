@@ -4,7 +4,7 @@ import { View } from 'react-native'
 class MemoView extends Component {
     render() {
         return (
-            <View style={{flex: 1, backgroundColor: 'blue'}}/>
+            <View style={{flex: 1, backgroundColor: '#fff'}}/>
         )
     }
 }

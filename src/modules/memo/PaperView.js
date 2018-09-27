@@ -4,7 +4,7 @@ import { View } from 'react-native'
 class PaperView extends Component {
     render() {
         return (
-            <View style={{flex: 1, backgroundColor: 'green'}}/>
+            <View style={{flex: 1, backgroundColor: '#fff'}}/>
         )
     }
 }

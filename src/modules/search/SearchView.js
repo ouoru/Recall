@@ -3,7 +3,6 @@ import { SectionList } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import OpacityIn from '../animate/OpacityIn'
 import SearchResult from './components/SearchResult'
 import SearchTitle from './components/SearchTitle'
 import EmptyLibrary from './components/EmptyLibrary'

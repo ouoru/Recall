@@ -9,12 +9,13 @@ import BottomTabs from '../components/BottomTabs'
 
 const HomeTabNavigator = createBottomTabNavigator(
     {
-        Search: SearchView,
+        Search: { screen: SearchView },
         Memo: { screen: MemoView },
         Paper: { screen: PaperView },
         Profile: { screen: ProfileView },
     },
     {
+        initialRouteName: 'Search',
         tabBarComponent: props => <BottomTabs {...props}/>
     }
 )
