@@ -55,7 +55,7 @@ class BottomTabs extends Component {
     render() {
         return (
             <View>
-                <Shadow side="top" height={3}/>
+                <Shadow side="top" height={4}/>
                 <View style={styles.tabStyle}>
                     {TABS.map(this._renderItem)}
                 </View>

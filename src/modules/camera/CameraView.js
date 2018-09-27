@@ -7,6 +7,7 @@ import Aperture from './components/Aperture'
 
 import { passPhotoData, passVideoData } from './CameraReducer'
 import Explore from '../navigation/Explore'
+import { types } from '../library/LibraryTypes'
 
 const { height, width } = Dimensions.get('window')
 
@@ -29,7 +30,7 @@ class CameraView extends Component {
             const data = await this.cameraRef.current.takePictureAsync(options)
             //this.cameraRef.current.pausePreview()
             this.props.passPhotoData(data)
-            Explore.navigate('Preview', { previewType: 'type/photo' })
+            Explore.navigate('Preview', { previewType: types.photo })
         }
     }
 
@@ -42,7 +43,7 @@ class CameraView extends Component {
             };
             const data = await this.cameraRef.current.recordAsync(options)
             this.props.passVideoData(data)
-            Explore.navigate('Preview', { previewType: 'type/video' })
+            Explore.navigate('Preview', { previewType: types.video })
         }
     }
 

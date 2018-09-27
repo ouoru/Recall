@@ -65,6 +65,7 @@ class PhotoView extends Component {
         this.setState({
             keywords: text
         })
+        //TODO check tags, existing keywords, etc
     }
 
     _verifyText = (previewType) => {
@@ -98,7 +99,7 @@ class PhotoView extends Component {
 
     render() {
         const { photoData, videoData } = this.props
-        const previewType = this.props.navigation.getParam('previewType', 'type/photo');
+        const previewType = this.props.navigation.getParam('previewType', 'type/photo')
         
         return (
             <View style={styles.container}>
@@ -147,8 +148,10 @@ class PhotoView extends Component {
                                 caretHidden={this.state.caretHidden}
                                 underlineColorAndroid={'#fff'}
                             />
-                            <Action name="check" color='#fff' size={25} style={{position: 'absolute', right: 5}}
-                                onPress={this._verifyText.bind(this, previewType)}/>
+                            <Action name="check" color={this.state.keywords?'#fff':'#f0f0f0'} size={25}
+                                style={{position: 'absolute', right: 5}}
+                                onPress={this._verifyText.bind(this, previewType)}
+                                disabled={!this.state.keywords}/>
                         </View>
                     </Animated.View>
                 </TouchableOpacity>

@@ -18,7 +18,7 @@ const SearchResult = ({item}) => {
                 alignItems: 'center',
                 paddingLeft: 15,
                 paddingRight: 25,
-                paddingBottom: 5,
+                paddingTop: 5,
             }}
         >
             <View>

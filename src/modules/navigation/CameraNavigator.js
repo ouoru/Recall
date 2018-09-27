@@ -39,10 +39,11 @@ const config = () => {
     return {
         // Define scene interpolation, eq. custom transition
         screenInterpolator: (sceneProps) => {
-            const {position, scene} = sceneProps;
-            const {index} = scene;
-
-            return slideUp(index, position);
+            const {position, scene} = sceneProps
+            const {index} = scene
+            
+            if (index === 0) return slideUp(index, position)
+            return opacity(index, position)
         }
     }
 };
@@ -54,7 +55,7 @@ const AppNavigator = createStackNavigator(
     },
     {
         navigationOptions: {
-            header: props => <CameraHeader/>
+            header: props => <CameraHeader {...props}/>
         },
         transitionConfig: config,
         cardStyle: {
