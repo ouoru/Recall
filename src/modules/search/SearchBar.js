@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Action from '../components/Action'
 
-import { updateSearchText, onSearchBarFocused } from './SearchReducer'
+import { updateSearchText, onSearchBarFocus, onSearchBarBlur } from './SearchReducer'
 import { statusBarMargin } from '../../services/deviceMargin'
 import { components } from '../common/types'
 
@@ -34,7 +34,7 @@ class SearchBar extends Component {
                     <TextInput
                         ref={'textInput'}
                         value={this.state.searchText}
-                        onFocus={this.props.onSearchBarFocused}
+                        onFocus={this.props.onSearchBarFocus}
                         onChangeText={this._onChangeText}
                         style={{
                             flex: 0.5,
@@ -77,5 +77,8 @@ const styles = {
 
 export default connect(
     null,
-    { updateSearchText, onSearchBarFocused }
+    { 
+        updateSearchText,
+        onSearchBarFocus, onSearchBarBlur
+    }
 )(SearchBar)

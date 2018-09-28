@@ -9,6 +9,7 @@ import EmptyLibrary from '../search/components/EmptyLibrary'
 
 import { SearchViewConfig } from '../search/SearchOptions'
 import SearchBar from '../search/SearchBar';
+import SearchView from '../search/SearchView'
 import ActionFloat from './components/ActionFloat'
 import BottomView from './BottomView';
 
@@ -99,6 +100,7 @@ class HomeView extends Component {
                     onPress={this._animateBottom.bind(this, true)}
                     bottomState={this.state.bottomState}
                 />
+                <SearchView/>
             </View>
         )    
     }

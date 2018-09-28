@@ -4,5 +4,5 @@ export const statusBarMargin = () => {
     if (Platform.OS === 'android') {
         return StatusBar.currentHeight
     }
-    return 0
+    return 20
 }

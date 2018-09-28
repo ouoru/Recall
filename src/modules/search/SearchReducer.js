@@ -19,12 +19,18 @@ export function updateSearchText(text) {
     }
 }
 
-export function onSearchBarFocused() {
+export function onSearchBarFocus() {
     return (dispatch, getState) => {
         const {library} = getState()
 
         fuseService.initialSearch(library)
         dispatch({ type: SHOW_SEARCH_VIEW })
+    }
+}
+
+export function onSearchBarBlur() {
+    return (dispatch) => {
+        dispatch({ type: HIDE_SEARCH_VIEW })
     }
 }
 
