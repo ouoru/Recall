@@ -5,7 +5,6 @@ import { PersistGate } from 'redux-persist/integration/react'
 import Explore from '../modules/navigation/Explore'
 
 import AppNavigator from '../modules/navigation/AppNavigator';
-import SearchBar from '../modules/search/SearchBar'
 import AndroidHandler from '../modules/components/AndroidHandler'
 
 class App extends Component {

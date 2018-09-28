@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-import { View, TextInput, Animated } from 'react-native'
+import { View, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 
 import Action from '../components/Action'
-import Shadow from '../components/Shadow'
 
 import { updateSearchText, onSearchBarFocused } from './SearchReducer'
 import { statusBarMargin } from '../../services/deviceMargin'
-
-const SEARCH_BAR_HEIGHT = 55
-const SHADOW_HEIGHT = 6
+import { components } from '../common/types'
 
 class SearchBar extends Component {
     constructor(props) {
@@ -60,18 +57,21 @@ class SearchBar extends Component {
 
 const styles = {
     container: {
-        height: SEARCH_BAR_HEIGHT + statusBarMargin(),
-        backgroundColor: '#fff',
+        height: components.searchBarHeight + statusBarMargin(),
+        backgroundColor: '#000',
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(0,0,0,0.1)',
     },
     searchBar: {
         flexDirection: 'row',
         marginTop: statusBarMargin(),
-        height: SEARCH_BAR_HEIGHT,
+        height: components.searchBarHeight,
         alignItems: 'center',
         paddingLeft: 15,
         paddingRight: 15,
+        backgroundColor: '#fff',
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(0,0,0,0.1)',
     }
 }
 

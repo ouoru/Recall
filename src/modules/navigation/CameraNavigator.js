@@ -21,20 +21,6 @@ const opacity = (index, position) => {
     };
 };
 
-const slideUp = (index, position) => {
-    const inputRange = [index - 1, index, index + 1];
-    const transform = [{
-        translateY: position.interpolate({
-            inputRange,
-            outputRange: [height, 0, 0],
-        })
-    }]
-
-    return {
-        transform
-    };
-}
-
 const config = () => {
     return {
         // Define scene interpolation, eq. custom transition
@@ -42,7 +28,6 @@ const config = () => {
             const {position, scene} = sceneProps
             const {index} = scene
             
-            if (index === 0) return slideUp(index, position)
             return opacity(index, position)
         }
     }
