@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { StatusBar, BackHandler } from 'react-native'
 import { connect } from 'react-redux'
 
-import Explore from '../navigation/Explore'
 import { hideSearchView } from '../search/SearchReducer'
 import { hidePreview } from '../camera/CameraReducer'
 

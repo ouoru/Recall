@@ -1,13 +1,7 @@
-import React from 'react'
-
-import { Dimensions } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 
 import CameraView from '../camera/CameraView'
 import PreviewView from '../preview/PreviewView'
-import CameraHeader from '../camera/components/CameraHeader'
-
-const { height } = Dimensions.get('window')
 
 const opacity = (index, position) => {
     const inputRange = [index - 1, index, index + 1];
@@ -39,9 +33,7 @@ const AppNavigator = createStackNavigator(
         Preview: { screen: PreviewView },
     },
     {
-        navigationOptions: {
-            header: props => <CameraHeader {...props}/>
-        },
+        headerMode: 'none',
         transitionConfig: config,
         cardStyle: {
             backgroundColor: 'transparent'

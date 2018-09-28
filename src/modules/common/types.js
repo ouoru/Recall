@@ -4,5 +4,6 @@ export const mediaTypes = {
 }
 
 export const components = {
-    searchBarHeight: 55
+    searchBarHeight: 55,
+    actionButtonSize: 60,
 }

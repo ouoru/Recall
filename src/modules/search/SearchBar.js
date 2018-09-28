@@ -37,7 +37,7 @@ class SearchBar extends Component {
                         onFocus={this.props.onSearchBarFocused}
                         onChangeText={this._onChangeText}
                         style={{
-                            flex: 1,
+                            flex: 0.5,
                             color: '#000',
                             fontFamily: 'Roboto-Regular',
                             fontSize: 16,

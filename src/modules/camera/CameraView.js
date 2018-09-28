@@ -8,6 +8,7 @@ import Aperture from './components/Aperture'
 import { passPhotoData, passVideoData } from './CameraReducer'
 import Explore from '../navigation/Explore'
 import { types } from '../library/LibraryTypes'
+import CameraOverlay from './components/CameraOverlay';
 
 const { height, width } = Dimensions.get('window')
 
@@ -66,6 +67,7 @@ class CameraView extends Component {
                     permissionDialogTitle={'Permission to use camera'}
                     permissionDialogMessage={'We need your permission to use your camera phone'}
                 />
+                <CameraOverlay/>
                 <Aperture onPress={this._takePicture} onLongPress={this._startVideo} onPressOut={this._onPressOut}/>
             </View>
         )
