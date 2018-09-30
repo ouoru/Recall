@@ -1,8 +1,10 @@
+import React from 'react'
 import { Dimensions } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 
 import CameraNavigator from './CameraNavigator'
 import HomeView from '../home/HomeView';
+import AndroidHandler from '../components/AndroidHandler'
 
 const { height } = Dimensions.get('window')
 
@@ -46,7 +48,9 @@ const AppNavigator = createStackNavigator(
         },
     },
     {
-        headerMode: 'none',
+        navigationOptions: {
+            header: props => <AndroidHandler {...props}/>
+        },
         transitionConfig: config,
         cardStyle: {
             backgroundColor: 'transparent'

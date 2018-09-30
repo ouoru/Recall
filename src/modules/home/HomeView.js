@@ -11,7 +11,9 @@ import { SearchViewConfig } from '../search/SearchOptions'
 import SearchBar from '../search/SearchBar';
 import SearchView from '../search/SearchView'
 import ActionFloat from './components/ActionFloat'
-import BottomView from './BottomView';
+import BottomView from '../bottom/BottomView';
+
+import { toggleBottomView } from './HomeReducer'
 
 const AnimatedOpacity = Animated.createAnimatedComponent(TouchableOpacity)
 
@@ -19,9 +21,18 @@ class HomeView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            showBottom: false,
             bottomState: new Animated.Value(0)
         }
+    }
+
+    componentWillReceiveProps(newProps) {
+        Animated.spring(
+            this.state.bottomState, {
+                toValue: newProps.showBottomView ? 1 : 0,
+                duration: 150,
+                useNativeDriver: true,
+            }
+        ).start()
     }
 
     _data(library, searchText = '') {
@@ -42,19 +53,6 @@ class HomeView extends Component {
         return newData
     }
 
-    _animateBottom = (show) => {
-        this.setState({
-            showBottom: show
-        })
-        Animated.spring(
-            this.state.bottomState, {
-                toValue: show ? 1 : 0,
-                duration: 250,
-                useNativeDriver: true,
-            }
-        ).start()
-    }
-
     render() {
         return (
             <View style={{backgroundColor: '#000', flex: 1}}>
@@ -68,7 +66,7 @@ class HomeView extends Component {
                         ],
                         flex: 1,
                         backgroundColor: '#fff',
-                        borderRadius: this.state.showBottom ? 8 : 0,
+                        borderRadius: this.props.showBottomView ? 8 : 0,
                         overflow: 'hidden',
                     }}
                 >
@@ -83,7 +81,7 @@ class HomeView extends Component {
                         pointerEvents={"box-none"}
                         ListEmptyComponent={EmptyLibrary}
                     />
-                    {this.state.showBottom && 
+                    {this.props.showBottomView && 
                         <AnimatedOpacity 
                             style={{
                                 position: 'absolute', top: 0, bottom: 0, left: 0, right: 0,
@@ -91,13 +89,12 @@ class HomeView extends Component {
                                 opacity: this.state.bottomState
                             }}
                             activeOpacity={1}
-                            onPress={this._animateBottom.bind(this, false)}
+                            onPress={this.props.toggleBottomView}
                         />
                     }
                     <ActionFloat/>
                 </Animated.View>
                 <BottomView
-                    onPress={this._animateBottom.bind(this, true)}
                     bottomState={this.state.bottomState}
                 />
                 <SearchView/>
@@ -115,6 +112,10 @@ const styles = {
 
 export default connect(
     state => ({
+        showBottomView: state.home.showBottomView,
         library: state.library,
-    })
+    }),
+    {
+        toggleBottomView,
+    }
 )(HomeView)

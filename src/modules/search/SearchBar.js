@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TextInput } from 'react-native'
+import { View, TextInput, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 
 import Action from '../components/Action'
@@ -14,6 +14,16 @@ class SearchBar extends Component {
         this.state = {
             searchText: null,
         }
+    }
+    
+    componentDidMount () {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide.bind(this));
+    }
+    componentWillUnmount () {
+        this.keyboardDidHideListener.remove();
+    }
+    _keyboardDidHide = () => {
+        this.refs.textInput.blur()
     }
 
     _onChangeText = (text = '') => {
